@@ -1,10 +1,11 @@
 # VGDC-ProjectCursed
 
 #Members
-1. James			cjhjames89
-2. Tyler			thetylerace13
-3. Andrew			jetsontwo
-4. Ryan			ryanapolinar
+|Name			|Role			|GitHub		|
+|James		|Programmer	|cjhjames89	|
+|Tyler		|Programmer	|thetylerace13	|
+|Andrew		|Programmer	|jetsontwo		|
+|Ryan			|Art			|ryanapolinar	|
 
 
 
