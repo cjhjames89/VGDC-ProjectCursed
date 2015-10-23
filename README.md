@@ -1,7 +1,10 @@
 # VGDC-ProjectCursed
 
-//Add your name and your GitHub username here. This readme file can be editted directly on GitHub project website. Don't foget to commit after adding your name.
+//Member names and usernames go here
 James			cjhjames89
+Tyler			thetylerace13
+Andrew			jetsontwo
+Ryan			ryanapolinar
 
 
 
