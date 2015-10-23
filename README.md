@@ -1,10 +1,10 @@
 # VGDC-ProjectCursed
 
-//Member names and usernames go here
-James			cjhjames89
-Tyler			thetylerace13
-Andrew			jetsontwo
-Ryan			ryanapolinar
+#Members
+1. James			cjhjames89
+2. Tyler			thetylerace13
+3. Andrew			jetsontwo
+4. Ryan			ryanapolinar
 
 
 
