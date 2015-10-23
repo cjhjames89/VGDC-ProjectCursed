@@ -1,10 +1,11 @@
 # VGDC-ProjectCursed
 
 #Members
-|Name			|Role			|GitHub		|
-|James		|Programmer	|cjhjames89	|
-|Tyler		|Programmer	|thetylerace13	|
-|Andrew		|Programmer	|jetsontwo		|
+|Name			|Role			|GitHub			|
+|---------------|---------------|---------------|
+|James			|Programmer		|cjhjames89		|
+|Tyler			|Programmer		|thetylerace13	|
+|Andrew			|Programmer		|jetsontwo		|
 |Ryan			|Art			|ryanapolinar	|
 
 
@@ -18,8 +19,25 @@
 
 3.	Click the plus sign on the top-left corner. Under the "clone" tab, you will see our project. Clone it to wherever you want on your computer.
 
-4.	Now you can launch Unity, and click "open". Choose the project folder, which should be "VGDC-ProjectCursed".
-	
-5.	And you are all set!
+4.	Verify. Open Git Shell and cd to your project folder. Type "git remote -v" to check if the two URL is same as the URL of this project.
 
-6.	If you can't set up the local git repository, feel free to ask me(James) or post on the Facebook page.
+```c#
+/*For windows, to change the current directory to another disk/partition/volume/drive, just type the letter of the volume followed by a colon: */
+C:\> d:
+D:\>
+
+//To change directory within a drive, type "cd " followed by the relative path:
+D:\> cd UCI\
+D:\UCI\> cd VGDC\Projects\
+D:\UCI\VGDC\Projects\> 
+
+//Dot, ".", means current directory. Double dot, "..", means parent directory:
+D:\UCI\VGDC\> cd ..
+D:\UCI\>
+```
+
+5.	Now you can launch Unity, and click "open". Choose the project folder, which should be "VGDC-ProjectCursed".
+	
+6.	And you are all set!
+
+7.	If you can't set up the local git repository, feel free to ask me(James) or post on the Facebook page.
