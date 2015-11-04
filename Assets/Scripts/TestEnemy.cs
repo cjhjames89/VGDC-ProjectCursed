@@ -17,7 +17,8 @@ public class TestEnemy : MonoBehaviour {
     {
         playerObject = GameObject.FindGameObjectWithTag("Player");
         transform.LookAt(playerObject.transform);
+        var movementVector = new Vector3(0.0f, 0.0f, 1);
 
-        transform.Translate(Vector3.forward*Time.deltaTime*speed);
+        transform.Translate(movementVector*Time.deltaTime*speed);
 	}
 }
