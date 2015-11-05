@@ -16,9 +16,14 @@ public class TestEnemy : MonoBehaviour {
 	void Update ()
     {
         playerObject = GameObject.FindGameObjectWithTag("Player");
-        transform.LookAt(playerObject.transform);
-        var movementVector = new Vector3(0.0f, 0.0f, 1);
 
-        transform.Translate(movementVector*Time.deltaTime*speed);
-	}
+        //Code that works in 3D
+        var targetLocation = playerObject.transform;
+        var move = new Vector2(targetLocation.position.x - transform.position.x, targetLocation.position.y - transform.position.y);
+        move.Normalize();
+        transform.Translate(move* Time.deltaTime * speed);
+
+
+
+    }
 }
