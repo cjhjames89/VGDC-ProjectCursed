@@ -29,6 +29,7 @@ public class TestEnemy : MonoBehaviour {
         if (direction.magnitude < 5)
         {
             GameObject.Destroy(gameObject);
+            HealthBar.takeDamage(1);
         }
 
 
