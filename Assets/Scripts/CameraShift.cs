@@ -3,9 +3,9 @@ using System.Collections;
 
 public class CameraShift : MonoBehaviour {
 
-    public Transform playerPosition;
+    Transform playerPosition;
     public GameObject player;
-    public Transform cameraPosition;
+    Transform cameraPosition;
 
     // Use this for initialization
     void Start()
