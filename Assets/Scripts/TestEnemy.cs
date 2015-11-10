@@ -32,6 +32,10 @@ public class TestEnemy : MonoBehaviour {
             HealthBar.takeDamage(1);
         }
 
+        if(direction.magnitude < 7)
+        {
+            EnemyHealth.takeDamage(1);
+        }
 
 
 
