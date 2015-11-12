@@ -29,18 +29,17 @@ public class Chaser : MonoBehaviour {
 
         transform.Translate(direction * Time.deltaTime * speed);
 
-        if (direction.x < 0)
+        transform.LookAt(new Vector3(player.position.x, gameObject.transform.position.y));
+
+        if (health <= 0)
         {
-            //Sprite faces one direction;
-        }
-        else if (direction.x > 0)
-        {
-            //Sprite faces other direction;
+            Destroy(gameObject);
         }
 
         //If it hits player, bounce away.
 	}
 
+    
     IEnumerator BounceBack ()
     {
         transform.position = Vector3.SmoothDamp(transform.position, player.position - direction*3, ref oppDirection, 1);
