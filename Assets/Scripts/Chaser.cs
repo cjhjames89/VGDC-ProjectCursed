@@ -9,7 +9,8 @@ public class Chaser : MonoBehaviour {
     private Vector3 direction1;
     private Vector3 direction2;
     private Vector3 move;
-    private Vector3 oppDirection;
+    private Vector3 endBounce;
+    private Vector3 velocity;
     public Collider2D enemyCollider;
     public Collider2D playerCollider;
 
@@ -19,16 +20,17 @@ public class Chaser : MonoBehaviour {
         health = 10f;
         speed = 4f;
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        oppDirection = -direction1;
 
-        enemyCollider = gameObject.GetComponent<Collider2D>();
+        enemyCollider = gameObject.GetComponent<BoxCollider2D>();
 
-        playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>();
+        playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<BoxCollider2D>();
+
+        velocity = Vector3.zero;
     }
 
-    void OnTriggerEnter(Collider2D playerCollider)
+    void OnTriggerEnter(BoxCollider2D playerCollider)
     {
-        StartCoroutine(BounceBack);
+        StartCoroutine(BounceBack());
     }
 
     // Update is called once per frame
@@ -66,7 +68,8 @@ public class Chaser : MonoBehaviour {
 
     IEnumerator BounceBack ()
     {
-        transform.position = Vector3.SmoothDamp(transform.position, player.position - direction1*3, ref oppDirection, 1);
+        endBounce = player.position - direction1 * 3;
+        transform.position = Vector3.SmoothDamp(transform.position, endBounce, ref velocity, 1);
 
         yield return new WaitForSeconds(1);
     }
