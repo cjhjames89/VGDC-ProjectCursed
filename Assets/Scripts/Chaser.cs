@@ -11,8 +11,8 @@ public class Chaser : MonoBehaviour {
     private Vector3 move;
     private Vector3 endBounce;
     private Vector3 velocity;
-    public Collider2D enemyCollider;
-    public Collider2D playerCollider;
+    public BoxCollider2D enemyCollider;
+    public BoxCollider2D playerCollider;
 
     // Use this for initialization
     void Start ()
@@ -28,9 +28,11 @@ public class Chaser : MonoBehaviour {
         velocity = Vector3.zero;
     }
 
-    void OnTriggerEnter(BoxCollider2D playerCollider)
+    void OnCollisionEnter(Collider other)
     {
-        StartCoroutine(BounceBack());
+        HealthBar.takeDamage(1);
+
+
     }
 
     // Update is called once per frame
@@ -68,8 +70,7 @@ public class Chaser : MonoBehaviour {
 
     IEnumerator BounceBack ()
     {
-        endBounce = player.position - direction1 * 3;
-        transform.position = Vector3.SmoothDamp(transform.position, endBounce, ref velocity, 1);
+        HealthBar.takeDamage(1);
 
         yield return new WaitForSeconds(1);
     }

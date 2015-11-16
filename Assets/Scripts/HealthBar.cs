@@ -23,4 +23,9 @@ public class HealthBar : MonoBehaviour {
         float x = healthBar.transform.localScale.x - (float) (damage * 0.099f);
         healthBar.transform.localScale = new Vector2(x, healthBar.transform.localScale.y);
     }
+
+    public static void Invincibile()
+    {
+        
+    }
 }
