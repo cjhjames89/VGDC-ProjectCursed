@@ -6,11 +6,12 @@ public class HealthBar : MonoBehaviour {
 
     public static Image healthBar;
     public int health;
+    public string Tag;
 
 
     // Use this for initialization
     void Start () {
-        healthBar = GameObject.FindWithTag("Health Bar").GetComponent<Image>();
+        healthBar = GameObject.FindWithTag(Tag).GetComponent<Image>();
     }
 	
 	// Update is called once per frame

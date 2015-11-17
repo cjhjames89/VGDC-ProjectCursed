@@ -6,7 +6,7 @@ public class CharacterSwap : MonoBehaviour {
 	public GameObject[] characters;
 	int characterIndex;
 
-	public static float drain;
+	public float drain;
 	public static Image energyBar;
 	float initialWidth;
 	
@@ -19,7 +19,7 @@ public class CharacterSwap : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		StartCoroutine(EnergyDrain());
-		drain = 5f;
+		//drain = 5f;
 		initialWidth = energyBar.transform.localScale.x;
 		characterIndex = 0;
 	}
@@ -34,7 +34,7 @@ public class CharacterSwap : MonoBehaviour {
 	IEnumerator EnergyDrain ()
 	{
 		//Drains the energybar every second
-		yield return new WaitForSeconds(1);
+		yield return new WaitForSeconds(0.1f);
 
 		//If the energybar is depleted then the for statement will go through the array
 		//and make the next character available while deactivating the previous one. Then the 
