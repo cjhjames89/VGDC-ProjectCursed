@@ -28,7 +28,7 @@ public class Chaser : MonoBehaviour {
         velocity = Vector3.zero;
     }
 
-    void OnCollisionEnter(Collider other)
+    void OnColliderEnter(Collider other)
     {
         HealthBar.takeDamage(1);
 
