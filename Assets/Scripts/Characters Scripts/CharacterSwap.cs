@@ -14,6 +14,12 @@ public class CharacterSwap : MonoBehaviour {
         Messenger.AddListener(GameEvent.EMPTY_ENERGY, OnEmptyEnergy);
     }
 
+    void OnDestroy()
+    {
+        //Remove the listener when this game object is destroyed.
+        Messenger.RemoveListener(GameEvent.EMPTY_ENERGY, OnEmptyEnergy);
+    }
+
     void Start()
     {
         charIndex = 0;

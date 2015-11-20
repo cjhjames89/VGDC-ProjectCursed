@@ -25,7 +25,7 @@ public class TestEnemy : MonoBehaviour {
         move.Normalize();
         transform.Translate(move * Time.deltaTime * speed);
 
-        print(direction.magnitude);
+        //print(direction.magnitude);
         if (direction.magnitude < 5)
         {
             GameObject.Destroy(gameObject);
