@@ -4,6 +4,7 @@ using System.Collections;
 public class ProjectileAction : MonoBehaviour {
     public static float speed;
     private BoxCollider2D projCollider;
+    public static int team = 2;
 
 	// Use this for initialization
 	void Start ()

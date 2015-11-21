@@ -10,6 +10,7 @@ public class BrawlerAction : MonoBehaviour {
     private bool leftPunch;
     public Vector3 velocity;
     private float punchDelay;
+    public static int team = 1;
 
 	// Use this for initialization
 	void Start ()

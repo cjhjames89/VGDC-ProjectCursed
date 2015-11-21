@@ -5,6 +5,7 @@ public class WizardAction : MonoBehaviour {
     public GameObject shield;
     public static float shieldSpeed;
     public static float shieldExpansion;
+    public static int team = 1;
 
 	// Use this for initialization
 	void Start ()

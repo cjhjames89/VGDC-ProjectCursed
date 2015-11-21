@@ -5,6 +5,7 @@ public class RangedAction : MonoBehaviour {
     public bool timeToFire;
     public static float speed;
     private GameObject projectile;
+    public static int team = 1;
 
 	// Use this for initialization
 	void Start ()

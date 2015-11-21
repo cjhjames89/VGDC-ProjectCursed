@@ -3,6 +3,7 @@ using System.Collections;
 
 public class ShieldAction : MonoBehaviour {
     public CircleCollider2D outerShield;
+    public static int team = 5;
 
 	// Use this for initialization
 	void Start ()

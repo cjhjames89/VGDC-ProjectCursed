@@ -29,10 +29,15 @@ public class Chaser : MonoBehaviour {
     }
 
     void OnColliderEnter(Collider other)
-    {
-        HealthBar.takeDamage(1);
-
-
+    {/*
+        if (other.gameObject.team == 1)
+        {
+            HealthBar.takeDamage(1);
+        }
+        else if (other.gameObject.team == 2)
+        {
+            take damage
+        }*/
     }
 
     // Update is called once per frame

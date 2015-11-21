@@ -7,6 +7,7 @@ public class BombAction : MonoBehaviour {
     public static float radius;
     public static float range;
     private bool isDetonated;
+    public static int team = 2;
 
 	// Use this for initialization
 	void Start ()

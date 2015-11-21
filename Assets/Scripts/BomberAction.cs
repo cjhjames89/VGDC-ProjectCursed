@@ -3,6 +3,7 @@ using System.Collections;
 
 public class BomberAction : MonoBehaviour {
     public GameObject Bomb;
+    public static int team = 1;
 
 	// Use this for initialization
 	void Start ()
