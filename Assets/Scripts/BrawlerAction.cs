@@ -11,12 +11,17 @@ public class BrawlerAction : MonoBehaviour {
     public Vector3 velocity;
     private float punchDelay;
     public static int team = 1;
+    public Vector3 leftFistRot;
+    public Vector3 rightFistRot;
 
 	// Use this for initialization
 	void Start ()
     {
         leftFist = GameObject.Find("Left Fist").transform;
         rightFist = GameObject.Find("Right Fist").transform;
+        leftFistRot = new Vector3(leftFist.rotation.x, leftFist.rotation.y, leftFist.rotation.z);
+        rightFistRot = new Vector3(rightFist.rotation.x, rightFist.rotation.y, rightFist.rotation.z);
+    
         speed = 10f;
         punchTime = false;
         leftPunch = true;
@@ -27,7 +32,36 @@ public class BrawlerAction : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-	    if (Input.GetButtonDown("Action") && punchDelay <= 0f)
+        if (Input.GetAxis("Horizontal") > 0 & Input.GetAxis("Vertical") == 0)
+        {
+            leftFist.localPosition = new Vector3(3, 2, 0);
+            leftFist.rotation = Quaternion.FromToRotation(leftFistRot, new Vector3(0, 0, 0));
+            rightFist.localPosition = new Vector3(3, -2, 0);
+            rightFist.rotation = Quaternion.FromToRotation(rightFistRot, new Vector3(0, 0, 0));
+        }
+        else if (Input.GetAxis("Horizontal") == 0 & Input.GetAxis("Vertical") < 0)
+        {
+            leftFist.localPosition = new Vector3(2, -3, 0);
+            leftFist.rotation = Quaternion.FromToRotation(leftFistRot, new Vector3(0, 0, 270));
+            rightFist.localPosition = new Vector3(-2, -3, 0);
+            rightFist.rotation = Quaternion.FromToRotation(rightFistRot, new Vector3(0, 0, 270));
+        }
+        else if (Input.GetAxis("Horizontal") < 0 & Input.GetAxis("Vertical") == 0)
+        {
+            leftFist.localPosition = new Vector3(-3, -2, 0);
+            leftFist.rotation = Quaternion.FromToRotation(leftFistRot, new Vector3(0, 0, 180));
+            rightFist.localPosition = new Vector3(-3, 2, 0);
+            rightFist.rotation = Quaternion.FromToRotation(rightFistRot, new Vector3(0, 0, 180));
+        }
+        else if (Input.GetAxis("Horizontal") == 0 & Input.GetAxis("Vertical") > 0)
+        {
+            leftFist.localPosition = new Vector3(-2, 3, 0);
+            leftFist.rotation = Quaternion.FromToRotation(leftFistRot, new Vector3(0, 0, 90));
+            rightFist.localPosition = new Vector3(2, 3, 0);
+            rightFist.rotation = Quaternion.FromToRotation(rightFistRot, new Vector3(0, 0, 90));
+        }
+
+        if (Input.GetButtonDown("Action") && punchDelay <= 0f)
         {
             StartCoroutine(DoPunch());
             punchDelay += (4 / speed);
