@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraShift : MonoBehaviour {
+public class CameraMovement : MonoBehaviour {
 
     Transform playerPosition;
     public GameObject player;
@@ -13,12 +13,13 @@ public class CameraShift : MonoBehaviour {
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         playerPosition = player.transform;
         cameraPosition = gameObject.transform;
-        
+
         if (playerPosition.position.x > cameraPosition.position.x + 20)
         {
             cameraPosition.Translate(20, 0, 0);
