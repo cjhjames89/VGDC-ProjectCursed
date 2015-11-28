@@ -29,15 +29,11 @@ public class Chaser : MonoBehaviour {
     }
 
     void OnColliderEnter(Collider other)
-    {/*
-        if (other.gameObject.team == 1)
+    {
+        if (other.gameObject.tag == "Player")
         {
             HealthBar.takeDamage(1);
         }
-        else if (other.gameObject.team == 2)
-        {
-            take damage
-        }*/
     }
 
     // Update is called once per frame
@@ -70,13 +66,6 @@ public class Chaser : MonoBehaviour {
             Destroy(gameObject);
         }
 
-        //If it hits player, bounce away.
 	}
 
-    IEnumerator BounceBack ()
-    {
-        HealthBar.takeDamage(1);
-
-        yield return new WaitForSeconds(1);
-    }
 }
