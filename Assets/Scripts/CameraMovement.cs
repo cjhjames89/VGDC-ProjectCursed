@@ -3,41 +3,17 @@ using System.Collections;
 
 public class CameraMovement : MonoBehaviour {
 
-    Transform playerPosition;
     public GameObject player;
-    Transform cameraPosition;
+    public float smoothX;
+    public float smoothY;
 
-    // Use this for initialization
-    void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-    }
-
-
+    private Vector2 velocity;
     // Update is called once per frame
     void Update()
     {
-        playerPosition = player.transform;
-        cameraPosition = gameObject.transform;
+        float posX = Mathf.SmoothDamp(transform.position.x, player.transform.position.x, ref velocity.x, smoothX);
+        float posY = Mathf.SmoothDamp(transform.position.y, player.transform.position.y, ref velocity.y, smoothY);
 
-        if (playerPosition.position.x > cameraPosition.position.x + 20)
-        {
-            cameraPosition.Translate(20, 0, 0);
-        }
-
-        if (playerPosition.position.x < cameraPosition.position.x - 20)
-        {
-            cameraPosition.Translate(-20, 0, 0);
-        }
-
-        if (playerPosition.position.y > cameraPosition.position.y + 20)
-        {
-            cameraPosition.Translate(0, 20, 0);
-        }
-
-        if (playerPosition.position.y < cameraPosition.position.y - 20)
-        {
-            cameraPosition.Translate(0, -20, 0);
-        }
+        transform.position = new Vector3(posX, posY, transform.position.z);
     }
 }
