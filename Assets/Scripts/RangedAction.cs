@@ -1,26 +1,34 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class RangedAction : MonoBehaviour {
-    public bool timeToFire;
-    public static float speed;
-    private GameObject projectile;
-    public static int team = 1;
+    private bool timeToFire;
+    public float speed;
+    public GameObject projectile;
+    private Transform characterTrans;
+    private float fireWait = 0f;
 
 	// Use this for initialization
 	void Start ()
     {
         timeToFire = false;
-        speed = 5f;
-        projectile = GameObject.Find("Projectile");
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-	    if (Input.GetButtonDown("Action"))
+        characterTrans = gameObject.transform;
+
+        if (fireWait > 0)
+        {
+            fireWait += -Time.deltaTime;
+        }
+
+	    if (Input.GetButtonDown("Action") & fireWait <= 0)
         {
             StartCoroutine(FireProjectile());
+            fireWait += 1 / speed;
         }
 	}
 
@@ -30,7 +38,7 @@ public class RangedAction : MonoBehaviour {
 
         do
         {
-            Instantiate(projectile);
+            Instantiate(projectile, characterTrans.position + new Vector3(3, 0, 0), characterTrans.rotation);
            
             if (Input.GetButton("Action") == false)
             {
@@ -40,5 +48,10 @@ public class RangedAction : MonoBehaviour {
             yield return new WaitForSeconds(1 / speed);
         } while (timeToFire == true);
        
+    }
+
+    private void Instantiate(GameObject projectile, Vector3 vector3)
+    {
+        throw new NotImplementedException();
     }
 }
