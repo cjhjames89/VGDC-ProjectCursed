@@ -74,7 +74,6 @@ public class BrawlerAction : MonoBehaviour {
 
         if (Input.GetButtonDown("Action") && punchDelay <= 0f)
         {
-            StartCoroutine(DoPunch());
             punchDelay += (4.1f / speed);
         }
 

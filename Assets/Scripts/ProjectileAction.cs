@@ -12,7 +12,7 @@ public class ProjectileAction : MonoBehaviour {
         GameObject.Destroy(gameObject, 3);
     }
 	
-    void OnColliderEnter(Collider other)
+    void OnCollisionEnter2D(Collision2D other)
     {
         //Give Damage to enemy.
     }

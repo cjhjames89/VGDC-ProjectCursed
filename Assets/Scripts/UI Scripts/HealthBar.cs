@@ -21,11 +21,11 @@ public class HealthBar : MonoBehaviour {
 
     public static void takeDamage(int damage)
     {
-        float x = healthBar.transform.localScale.x - (float) (damage * 0.099f);
+        float x = healthBar.transform.localScale.x - (damage * 0.099f);
         healthBar.transform.localScale = new Vector2(x, healthBar.transform.localScale.y);
     }
 
-    public static void Invincibile()
+    public static void Invincible(int time)
     {
         
     }
