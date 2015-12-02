@@ -3,27 +3,37 @@ using System.Collections;
 
 public class Chaser : MonoBehaviour {
 
-    public float health;
+    public float totalHealth;
+    public static float health;
     public float speed;
     public static Transform player;
-    private Vector3 direction1;
-    private Vector3 direction2;
-    private Vector3 move;
+    public GameObject healthBar;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
+
+        health = totalHealth;
+    }
+
+    void OnCollisionEnter2D (Collision contact)
+    {
+        if (contact.collider.gameObject.tag == "Enemy")
+        {
+        }
     }
 
     // Update is called once per frame
     void Update ()
     {
-        direction1 = new Vector3(player.position.x - gameObject.transform.position.x, player.position.y - gameObject.transform.position.y, 0);
+        healthBar.transform.localScale = new Vector3(2 * health / totalHealth, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
 
-        move = direction1;
+        Vector3 direction1 = new Vector3(player.position.x - gameObject.transform.position.x, player.position.y - gameObject.transform.position.y, 0);
 
-        direction2 = new Vector3(-direction1.x, direction1.y, direction1.z);
+        Vector3 move = direction1;
+
+        Vector3 direction2 = new Vector3(-direction1.x, direction1.y, direction1.z);
 
         direction1.Normalize();
         direction2.Normalize();
@@ -48,4 +58,8 @@ public class Chaser : MonoBehaviour {
 
 	}
 
+    public static void EnemyDamage(int damage)
+    {
+        health -= damage;
+    }
 }

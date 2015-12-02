@@ -3,18 +3,22 @@ using System.Collections;
 
 public class ProjectileAction : MonoBehaviour {
     public float speed;
-    private BoxCollider2D projCollider;
+    public static int damage;
 
 	// Use this for initialization
 	void Start ()
     {
-        projCollider = gameObject.GetComponent<BoxCollider2D>();
-        GameObject.Destroy(gameObject, 3);
+        Destroy(gameObject, 3);
     }
 	
-    void OnCollision2D(Collision2D other)
+    void OnCollision2D(Collision2D contact)
     {
-        //Give Damage to enemy.
+        if (contact.collider.gameObject.tag == "Enemy")
+        {
+            Chaser.EnemyDamage(damage);
+        }
+
+        Destroy(gameObject);
     }
 
 	// Update is called once per frame
