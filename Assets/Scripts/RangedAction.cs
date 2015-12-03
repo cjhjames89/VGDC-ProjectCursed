@@ -22,13 +22,13 @@ public class RangedAction : MonoBehaviour {
 
         if (fireWait > 0)
         {
-            fireWait += -Time.deltaTime;
+            fireWait -= Time.deltaTime;
         }
 
 	    if (Input.GetButtonDown("Action") & fireWait <= 0)
         {
             StartCoroutine(FireProjectile());
-            fireWait += 1 / speed;
+            fireWait += 1.2f / speed;
         }
 	}
 
@@ -38,15 +38,18 @@ public class RangedAction : MonoBehaviour {
 
         do
         {
-            Instantiate(projectile, characterTrans.position + new Vector3(3, 0, 0), characterTrans.rotation);
-           
+            Instantiate(projectile, characterTrans.position + new Vector3(5, 0, 0), characterTrans.rotation);
+
+            yield return new WaitForSeconds(1 / (speed * 2));
+
             if (Input.GetButton("Action") == false)
             {
                 timeToFire = false;
             }
 
-            yield return new WaitForSeconds(1 / speed);
-        } while (timeToFire == true);
+            yield return new WaitForSeconds(1 / (speed * 2));
+
+        } while (timeToFire);
        
     }
 

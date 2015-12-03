@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ProjectileAction : MonoBehaviour {
     public float speed;
-    public static int damage;
+    public int damage;
 
 	// Use this for initialization
 	void Start ()
@@ -11,7 +11,7 @@ public class ProjectileAction : MonoBehaviour {
         Destroy(gameObject, 3);
     }
 	
-    void OnCollision2D(Collision2D contact)
+    void OnCollisionEnter2D(Collision2D contact)
     {
         if (contact.collider.gameObject.tag == "Enemy")
         {

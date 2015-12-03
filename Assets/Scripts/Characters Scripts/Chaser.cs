@@ -17,13 +17,6 @@ public class Chaser : MonoBehaviour {
         health = totalHealth;
     }
 
-    void OnCollisionEnter2D (Collision contact)
-    {
-        if (contact.collider.gameObject.tag == "Enemy")
-        {
-        }
-    }
-
     // Update is called once per frame
     void Update ()
     {
