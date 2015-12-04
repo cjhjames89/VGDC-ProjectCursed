@@ -2,44 +2,46 @@
 using System.Collections;
 
 public class BombAction : MonoBehaviour {
-    private bool isArmed;
-    public static float armTime;
-    public static float radius;
-    public static float range;
-    private bool isDetonated;
-    public static int team = 2;
+    public float armTime;
+    public float range;
+    public float duration;
+    public GameObject explosion;
+    public CircleCollider2D detection;
 
 	// Use this for initialization
 	void Start ()
     {
-        armTime = 1f;
-        radius = 3f;
-        range = 0.5f;
-        isArmed = false;
-        isDetonated = false;
-        gameObject.GetComponent<CircleCollider2D>().enabled = false;
+        detection.enabled = false;
+        explosion.SetActive(false);
+        Destroy(gameObject, duration);
 	}
 
-    void OnColliderEnter(Collider other)
+    void OnCollisionEnter2D(Collision2D enemy)
     {
-        if (isDetonated == false)
+        if (enemy.collider.gameObject.tag == "Enemy")
         {
-            isDetonated = true;
+            StartCoroutine(Explode());
         }
-        else
-        {
-            //Destroy enemies within the new explosion radius
-        }
-        
     }
 
 	// Update is called once per frame
 	void Update ()
     {
-        
-	    if (isDetonated == true)
+        armTime -= Time.deltaTime;
+
+        if (armTime <= 0)
         {
-            gameObject.GetComponent<CircleCollider2D>().enabled = true;
+            detection.enabled = true;
+            detection.radius = range;
         }
 	}
+
+    IEnumerator Explode()
+    {
+        explosion.SetActive(true);
+
+        yield return new WaitForSeconds(0.5f);
+
+        Destroy(gameObject);
+    }
 }

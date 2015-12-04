@@ -3,20 +3,23 @@ using System.Collections;
 
 public class BomberAction : MonoBehaviour {
     public GameObject Bomb;
-    public static int team = 1;
+    public int limit;
+    private int numBombs;
 
 	// Use this for initialization
 	void Start ()
     {
-        Bomb = GameObject.Find("Bomb");
+
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-	    if (Input.GetButtonDown("Action"))
+        numBombs = GameObject.FindGameObjectsWithTag("Friendly").Length;
+
+        if (Input.GetButtonDown("Action") & numBombs < limit)
         {
-            GameObject.Instantiate(Bomb);
+            Instantiate(Bomb, gameObject.transform.position + new Vector3(-5, 0, 0), gameObject.transform.rotation);
         }
 	}
 }
