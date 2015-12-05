@@ -19,7 +19,7 @@ public class BomberAction : MonoBehaviour {
 
         if (Input.GetButtonDown("Action") & numBombs < limit)
         {
-            Instantiate(Bomb, gameObject.transform.position + new Vector3(-5, 0, 0), gameObject.transform.rotation);
+            Instantiate(Bomb, gameObject.transform.position + new Vector3(0, 0, 0), gameObject.transform.rotation);
         }
 	}
 }
