@@ -2,25 +2,27 @@
 using System.Collections;
 
 public class ShieldAction : MonoBehaviour {
-    public CircleCollider2D outerShield;
-    public static int team = 5;
+    public int damage;
+    public float size;
 
 	// Use this for initialization
 	void Start ()
     {
-        outerShield = gameObject.GetComponent<CircleCollider2D>();
+        gameObject.transform.localScale = new Vector3(size, size, 1);
 	}
-	
-    void OnColliderEnter(Collider other)
-    {
-        //Destroy enemy projectiles
-    }
 
+    void OnCollisionEnter2D(Collision2D touch)
+    {
+        if (touch.collider.gameObject.tag == "Enemy")
+        {
+            Chaser.EnemyDamage(damage);
+        }
+    }
 
 	// Update is called once per frame
 	void Update ()
     {
-        GameObject.Destroy(gameObject, 5);
+        PublicFunctions.PhaseThruFriend(gameObject);
 	}
 }
 
