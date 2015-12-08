@@ -13,6 +13,8 @@ public class WizardAction : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        gameObject.transform.localPosition = Vector3.zero;
+
         if (Input.GetButton("Action"))
         {
             shield.SetActive(true);

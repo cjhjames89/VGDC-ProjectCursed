@@ -14,7 +14,7 @@ public class PlayerCollisions : MonoBehaviour {
         if (hit.collider.gameObject.tag == "Enemy" | hit.collider.gameObject.tag == "Danger")
         {
             print("Collided");
-            HealthBar.takeDamage(1);
+            CharacterHealth.takeDamage(1);
         }
     }
 

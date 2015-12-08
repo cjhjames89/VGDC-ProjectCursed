@@ -15,6 +15,8 @@ public class BomberAction : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        gameObject.transform.localPosition = Vector3.zero;
+
         numBombs = GameObject.FindGameObjectsWithTag("Friendly").Length;
 
         if (Input.GetButtonDown("Action") & numBombs < limit)

@@ -20,6 +20,8 @@ public class RangedAction : MonoBehaviour {
     {
         characterTrans = gameObject.transform;
 
+        characterTrans.localPosition = Vector3.zero;
+
         if (fireWait > 0)
         {
             fireWait -= Time.deltaTime;
