@@ -8,7 +8,7 @@ public class ShieldAction : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        gameObject.transform.localScale = new Vector3(size, size, 1);
+        gameObject.transform.localScale = new Vector3(size, size, size);
 	}
 
     void OnCollisionEnter2D(Collision2D touch)
