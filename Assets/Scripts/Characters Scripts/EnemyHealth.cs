@@ -11,7 +11,7 @@ public class EnemyHealth : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        healthBar = GameObject.FindWithTag("EHealth").GetComponent<Image>();
+        //healthBar = GameObject.FindWithTag("EHealth").GetComponent<Image>();
     }
 
     // Update is called once per frame
