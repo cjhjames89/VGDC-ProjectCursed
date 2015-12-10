@@ -53,6 +53,11 @@ public class Chaser : MonoBehaviour {
 
     public void EnemyDamage(int damage)
     {
+        if (!healthBar.activeSelf)
+        {
+            healthBar.SetActive(true);
+        }
+
         health -= damage;
     }
 }
