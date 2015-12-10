@@ -4,9 +4,9 @@ using System.Collections;
 public class Chaser : MonoBehaviour {
 
     public float totalHealth;
-    public static float health;
+    private float health;
     public float speed;
-    public static Transform player;
+    private Transform player;
     public GameObject healthBar;
 
     // Use this for initialization
@@ -51,7 +51,7 @@ public class Chaser : MonoBehaviour {
 
 	}
 
-    public static void EnemyDamage(int damage)
+    public void EnemyDamage(int damage)
     {
         health -= damage;
     }

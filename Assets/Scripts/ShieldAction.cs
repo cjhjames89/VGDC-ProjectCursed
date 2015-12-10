@@ -15,7 +15,9 @@ public class ShieldAction : MonoBehaviour {
     {
         if (touch.collider.gameObject.tag == "Enemy")
         {
-            Chaser.EnemyDamage(damage);
+            //Chaser.EnemyDamage(damage);
+            Chaser c = (Chaser) touch.collider.gameObject.GetComponent(typeof(Chaser));
+            c.EnemyDamage(damage);
         }
     }
 
