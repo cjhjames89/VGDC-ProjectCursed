@@ -10,7 +10,6 @@ public class ProjectileAction : MonoBehaviour {
 	void Start ()
     {
         Destroy(gameObject, 3);
-        startState = DirectionTracking.state;
     }
 	
     void OnCollisionEnter2D(Collision2D contact)
@@ -28,21 +27,6 @@ public class ProjectileAction : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (startState == 1)
-        {
             transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
-        }
-        else if (startState == 3)
-        {
-            transform.Translate(new Vector3(-1, 0, 0) * speed * Time.deltaTime);
-        }
-        else if (startState == 4)
-        {
-            transform.Translate(new Vector3(0, 1, 0) * speed * Time.deltaTime);
-        }
-        else if (startState == 2)
-        {
-            transform.Translate(new Vector3(0, -1, 0) * speed * Time.deltaTime);
-        }
     }
 }

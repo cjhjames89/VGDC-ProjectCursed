@@ -2,19 +2,25 @@
 using System.Collections;
 
 public class PlayerCollisions : MonoBehaviour {
+    private bool notInvincible;
+    public float InvincibleTime;
+    public static SpriteRenderer sprite;
 
 	// Use this for initialization
 	void Start ()
     {
-	
+        notInvincible = true;
 	}
 
-    void OnCollisionEnter2D(Collision2D hit)
+    void OnCollisionStay2D(Collision2D hit)
     {
         if (hit.collider.gameObject.tag == "Enemy" | hit.collider.gameObject.tag == "Danger")
         {
-            print("Collided");
-            CharacterHealth.takeDamage(1);
+            if (notInvincible)
+            {
+                CharacterHealth.takeDamage(1);
+                StartCoroutine(Invincible(InvincibleTime));
+            }
         }
     }
 
@@ -23,4 +29,15 @@ public class PlayerCollisions : MonoBehaviour {
     {
 	
 	}
+
+    IEnumerator Invincible(float time)
+    {
+        notInvincible = false;
+        sprite.color = Color.gray;
+
+        yield return new WaitForSeconds(time);
+
+        notInvincible = true;
+        sprite.color = Color.white;
+    }
 }

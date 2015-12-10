@@ -23,6 +23,7 @@ public class CharacterSwap : MonoBehaviour {
     void Start()
     {
         charIndex = 0;
+        PlayerCollisions.sprite = characters[0].GetComponent<SpriteRenderer>();
     }
 
     //Broadcast registered function.
@@ -31,7 +32,10 @@ public class CharacterSwap : MonoBehaviour {
     {
         //Set current to inactive.
         characters[charIndex % characters.Length].SetActive(false);
+
         //Set next to active.
         characters[++charIndex % characters.Length].SetActive(true);
+        PlayerCollisions.sprite = characters[charIndex % characters.Length].GetComponent<SpriteRenderer>();
+        EnergyBar.accel = 0;
     }
 }
