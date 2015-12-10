@@ -3,6 +3,7 @@ using System.Collections;
 
 public class BrawlerAction : MonoBehaviour {
     public GameObject PunchCollider;
+    public float cost;
 
     // Use this for initialization
     void Start()
@@ -19,10 +20,12 @@ public class BrawlerAction : MonoBehaviour {
         if (Input.GetButton("Action"))
         {
             PunchCollider.SetActive(true);
+            EnergyBar.accel = cost;
         }
         else
         {
             PunchCollider.SetActive(false);
+            EnergyBar.accel = 0;
         }
     }
 }

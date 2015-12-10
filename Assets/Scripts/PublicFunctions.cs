@@ -31,4 +31,11 @@ public class PublicFunctions : MonoBehaviour
             Physics2D.IgnoreCollision(thing.GetComponent<Collider2D>(), col.GetComponent<Collider2D>());
         }
     }
+
+    public static IEnumerator InstantDrain(float drain)
+    {
+        EnergyBar.instant = drain;
+        yield return new WaitForSeconds(1 / 60);
+        EnergyBar.instant = 0;
+    }
 }

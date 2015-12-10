@@ -5,10 +5,17 @@ using UnityEngine.UI;
 public class EnergyBar : MonoBehaviour {
 
     public float decreaseSpeed = 0.08f;
+    public static float accel;
+    public static float fill;
+    public static float instant;
 
-	void Update () {
+    void Update ()
+    {
+        fill = GetComponent<Image>().fillAmount;
+
         //Change the fill amount of the sprite every frame. SMOOTH!
-        GetComponent<Image>().fillAmount -= decreaseSpeed * Time.deltaTime;
+        fill -= (decreaseSpeed + accel) * Time.deltaTime + instant;
+        GetComponent<Image>().fillAmount = fill;
 
         //If the energy bar is empty.
         if (GetComponent<Image>().fillAmount <= 0)
@@ -21,4 +28,5 @@ public class EnergyBar : MonoBehaviour {
             GetComponent<Image>().fillAmount = 1;
         }
 	}
+
 }

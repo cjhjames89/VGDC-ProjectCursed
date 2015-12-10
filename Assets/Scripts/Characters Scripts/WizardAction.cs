@@ -3,6 +3,7 @@ using System.Collections;
 
 public class WizardAction : MonoBehaviour {
     public GameObject shield;
+    public float cost;
 
 	// Use this for initialization
 	void Start ()
@@ -18,10 +19,12 @@ public class WizardAction : MonoBehaviour {
         if (Input.GetButton("Action"))
         {
             shield.SetActive(true);
+            EnergyBar.accel = cost;
         }
         else
         {
             shield.SetActive(false);
+            EnergyBar.accel = 0;
         }
         
 	}

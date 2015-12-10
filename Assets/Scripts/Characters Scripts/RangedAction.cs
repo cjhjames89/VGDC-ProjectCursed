@@ -8,6 +8,7 @@ public class RangedAction : MonoBehaviour {
     public GameObject projectile;
     private Transform characterTrans;
     private float fireWait = 0f;
+    public float cost;
 
 	// Use this for initialization
 	void Start ()
@@ -40,7 +41,24 @@ public class RangedAction : MonoBehaviour {
 
         do
         {
-            Instantiate(projectile, characterTrans.position + new Vector3(5, 0, 0), characterTrans.rotation);
+            if (DirectionTracking.state == 1)
+            {
+                Instantiate(projectile, characterTrans.position + new Vector3(5, 0, 0), characterTrans.rotation);
+            }
+            else if (DirectionTracking.state == 3)
+            {
+                Instantiate(projectile, characterTrans.position + new Vector3(-5, 0, 0), characterTrans.rotation);
+            }
+            else if (DirectionTracking.state == 4)
+            {
+                Instantiate(projectile, characterTrans.position + new Vector3(0, 5, 0), characterTrans.rotation);
+            }
+            else if (DirectionTracking.state == 2)
+            {
+                Instantiate(projectile, characterTrans.position + new Vector3(0, -5, 0), characterTrans.rotation);
+            }
+
+            StartCoroutine(PublicFunctions.InstantDrain(cost));
 
             yield return new WaitForSeconds(1 / (speed * 2));
 

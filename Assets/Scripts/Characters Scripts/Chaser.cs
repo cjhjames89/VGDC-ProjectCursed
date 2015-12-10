@@ -14,11 +14,13 @@ public class Chaser : MonoBehaviour {
     {
         player = GameObject.FindWithTag("Player").transform;
 
+        healthBar.SetActive(false);
+
         health = totalHealth;
     }
 
     // Update is called once per frame
-    void Update ()
+    void Update()
     {
         healthBar.transform.localScale = new Vector3(2 * health / totalHealth, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
 
@@ -42,6 +44,11 @@ public class Chaser : MonoBehaviour {
             transform.LookAt(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 1));
 
             transform.Translate(direction1 * Time.deltaTime * speed);
+        }
+
+        if (health != totalHealth)
+        {
+            healthBar.SetActive(true);
         }
 
         if (health <= 0)

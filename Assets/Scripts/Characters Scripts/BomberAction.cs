@@ -5,6 +5,7 @@ public class BomberAction : MonoBehaviour {
     public GameObject Bomb;
     public int limit;
     private int numBombs;
+    public float cost;
 
 	// Use this for initialization
 	void Start ()
@@ -22,6 +23,7 @@ public class BomberAction : MonoBehaviour {
         if (Input.GetButtonDown("Action") & numBombs < limit)
         {
             Instantiate(Bomb, gameObject.transform.position + new Vector3(0, 0, 0), gameObject.transform.rotation);
+            StartCoroutine(PublicFunctions.InstantDrain(cost));
         }
 	}
 }
