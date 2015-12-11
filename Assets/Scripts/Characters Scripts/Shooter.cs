@@ -2,70 +2,103 @@
 using System.Collections;
 
 public class Shooter : MonoBehaviour {
-    public static float speed;
-    private float movement;
-    public static float range;
-    private Vector3 distance;
-    public static float fireRate;
-    private Vector3 player;
-    private Vector2 move;
-    public static float health;
-    public Collider2D enemyCollider;
-    public Collider2D playerCollider;
+    public float totalHealth;
+    private float health;
+    public float speed;
+    private Transform player;
+    public GameObject healthBar;
+    public float range;
+    public GameObject projectile;
+    public float rate;
+    private float fireTime;
 
     // Use this for initialization
-    void Start ()
+    void Start()
     {
-        health = 10f;
-        range = 10f;
-        speed = 4f;
-        fireRate = 1f;
-        player = GameObject.FindGameObjectWithTag("Player").transform.position;
-        distance = new Vector3(gameObject.transform.position.x - player.x, gameObject.transform.position.x - player.x);
-        move = new Vector2(gameObject.transform.position.x - player.x, gameObject.transform.position.y - player.y);
+        player = GameObject.FindWithTag("Player").transform;
 
-        move.Normalize();
+        healthBar.SetActive(false);
 
-        enemyCollider = gameObject.GetComponent<Collider2D>();
+        health = totalHealth;
 
-        playerCollider = GameObject.FindGameObjectWithTag("Player").GetComponent<Collider2D>();
+        fireTime = 0;
     }
-	
-	// Update is called once per frame
-	void Update ()
-    {
-        transform.LookAt(player);
 
-        /*
-        if (distance.magnitude > range)
+    // Update is called once per frame
+    void Update()
+    {
+        float difference = (player.position - gameObject.transform.position).magnitude;
+
+        if (fireTime > 0)
         {
-            movement = speed;
+            fireTime -= Time.deltaTime;
         }
-        else
+
+        healthBar.transform.localScale = new Vector3(2 * health / totalHealth, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
+
+        Vector3 direction1 = new Vector3(player.position.x - gameObject.transform.position.x, player.position.y - gameObject.transform.position.y, 0);
+
+        Vector3 move = direction1;
+
+        Vector3 direction2 = new Vector3(-direction1.x, direction1.y, direction1.z);
+
+        direction1.Normalize();
+        direction2.Normalize();
+
+        if (move.x < 0)
         {
-            StartCoroutine(shoot);
+            transform.LookAt(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -1));
+
+            transform.Translate(direction2 * Time.deltaTime * speed);
         }
-        */
+        else if (move.x > 0)
+        {
+            transform.LookAt(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 1));
+
+            transform.Translate(direction1 * Time.deltaTime * speed);
+        }
+
+        if (difference <= range & fireTime <= 0)
+        {
+            if (ShooterDirection.state == 1)
+            {
+                Instantiate(projectile, gameObject.transform.position + new Vector3(7, 0, 0), Quaternion.Euler(0, 0, 0));
+            }
+            else if (ShooterDirection.state == 3)
+            {
+                Instantiate(projectile, gameObject.transform.position + new Vector3(-7, 0, 0), Quaternion.Euler(0, 0, 180));
+            }
+            else if (ShooterDirection.state == 4)
+            {
+                Instantiate(projectile, gameObject.transform.position + new Vector3(0, 7, 0), Quaternion.Euler(0, 0, 90));
+            }
+            else if (ShooterDirection.state == 2)
+            {
+                Instantiate(projectile, gameObject.transform.position + new Vector3(0, -7, 0), Quaternion.Euler(0, 0, 270));
+            }
+
+            fireTime += 1;
+        }
+
+        if (health != totalHealth)
+        {
+            healthBar.SetActive(true);
+        }
 
         if (health <= 0)
         {
             Destroy(gameObject);
         }
 
-        transform.Translate(move * speed * Time.deltaTime);
-
-        
     }
 
-    /*Might want to make another object that attaches to shooter to find angle of player
-    so that the whole sprite won't change angle*/
-
-    IEnumerator shoot()
+    public void EnemyDamage(int damage)
     {
-        speed = 0f;
+        if (!healthBar.activeSelf)
+        {
+            healthBar.SetActive(true);
+        }
 
-        GameObject.Instantiate(GameObject.FindGameObjectWithTag("Projectile"));
-
-        yield return new WaitForSeconds(1 / fireRate);
+        health -= damage;
     }
 }
