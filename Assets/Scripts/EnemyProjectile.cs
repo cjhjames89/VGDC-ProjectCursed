@@ -23,5 +23,7 @@ public class EnemyProjectile : MonoBehaviour {
     void Update()
     {
         transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
+
+        PublicFunctions.PhaseThruEnemy(gameObject);
     }
 }

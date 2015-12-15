@@ -28,6 +28,7 @@ public class Shooter : MonoBehaviour {
     void Update()
     {
         float difference = (player.position - gameObject.transform.position).magnitude;
+        Vector3 Angle = (player.position - gameObject.transform.position).normalized;
 
         if (fireTime > 0)
         {
@@ -38,51 +39,22 @@ public class Shooter : MonoBehaviour {
 
         Vector3 direction1 = new Vector3(player.position.x - gameObject.transform.position.x, player.position.y - gameObject.transform.position.y, 0);
 
-        Vector3 move = direction1;
-
-        Vector3 direction2 = new Vector3(-direction1.x, direction1.y, direction1.z);
-
         direction1.Normalize();
-        direction2.Normalize();
-
-        if (move.x < 0)
-        {
-            transform.LookAt(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -1));
-
-            transform.Translate(direction2 * Time.deltaTime * speed);
-        }
-        else if (move.x > 0)
-        {
-            transform.LookAt(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 1));
-
-            transform.Translate(direction1 * Time.deltaTime * speed);
-        }
 
         if (difference <= range & fireTime <= 0)
         {
-            if (ShooterDirection.state == 1)
-            {
-                Instantiate(projectile, gameObject.transform.position + new Vector3(7, 0, 0), Quaternion.Euler(0, 0, 0));
-            }
-            else if (ShooterDirection.state == 3)
-            {
-                Instantiate(projectile, gameObject.transform.position + new Vector3(-7, 0, 0), Quaternion.Euler(0, 0, 180));
-            }
-            else if (ShooterDirection.state == 4)
-            {
-                Instantiate(projectile, gameObject.transform.position + new Vector3(0, 7, 0), Quaternion.Euler(0, 0, 90));
-            }
-            else if (ShooterDirection.state == 2)
-            {
-                Instantiate(projectile, gameObject.transform.position + new Vector3(0, -7, 0), Quaternion.Euler(0, 0, 270));
-            }
+            Instantiate(projectile, gameObject.transform.position + Angle * 7, Quaternion.Euler(0, 0, PublicFunctions.FindAngle(Angle.x, Angle.y)));
 
             fireTime += 1;
         }
 
-        if (health != totalHealth)
+        if (difference > range*0.8)
         {
-            healthBar.SetActive(true);
+            transform.Translate(direction1 * Time.deltaTime * speed);
+        }
+        else if (difference < range*0.8)
+        {
+            transform.Translate(-direction1 * Time.deltaTime * speed);
         }
 
         if (health <= 0)
@@ -90,6 +62,9 @@ public class Shooter : MonoBehaviour {
             Destroy(gameObject);
         }
 
+        PublicFunctions.PhaseThruEnemy(gameObject);
+
+        gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
     public void EnemyDamage(int damage)

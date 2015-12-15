@@ -46,6 +46,8 @@ public class Chaser : MonoBehaviour {
             transform.Translate(direction1 * Time.deltaTime * speed);
         }
 
+        PublicFunctions.PhaseThruEnemy(gameObject);
+
         if (health != totalHealth)
         {
             healthBar.SetActive(true);
