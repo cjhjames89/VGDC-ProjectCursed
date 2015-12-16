@@ -8,6 +8,8 @@ public class Chaser : MonoBehaviour {
     public float speed;
     private Transform player;
     public GameObject healthBar;
+    private Vector3 direction;
+    private float aroundTime;
 
     // Use this for initialization
     void Start()
@@ -17,6 +19,8 @@ public class Chaser : MonoBehaviour {
         healthBar.SetActive(false);
 
         health = totalHealth;
+
+        aroundTime = 0;
     }
 
     // Update is called once per frame
@@ -24,29 +28,23 @@ public class Chaser : MonoBehaviour {
     {
         healthBar.transform.localScale = new Vector3(2 * health / totalHealth, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
 
-        Vector3 direction1 = new Vector3(player.position.x - gameObject.transform.position.x, player.position.y - gameObject.transform.position.y, 0);
-
-        Vector3 move = direction1;
-
-        Vector3 direction2 = new Vector3(-direction1.x, direction1.y, direction1.z);
-
-        direction1.Normalize();
-        direction2.Normalize();
-
-        if (move.x < 0)
+        if (aroundTime > 0)
         {
-            transform.LookAt(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, -1));
-
-            transform.Translate(direction2 * Time.deltaTime * speed);
+            direction = new Vector3(gameObject.transform.position.y - player.position.y, player.position.x - gameObject.transform.position.x, 0);
+            aroundTime -= Time.deltaTime;
         }
-        else if (move.x > 0)
+        else
         {
-            transform.LookAt(new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, 1));
-
-            transform.Translate(direction1 * Time.deltaTime * speed);
+            direction = new Vector3(player.position.x - gameObject.transform.position.x, player.position.y - gameObject.transform.position.y, 0);
         }
+        
+        direction.Normalize();
+
+        transform.rotation = Quaternion.Euler(0, 0, 0);
 
         PublicFunctions.PhaseThruEnemy(gameObject);
+
+        transform.Translate(direction * Time.deltaTime * speed);
 
         if (health != totalHealth)
         {
@@ -59,6 +57,14 @@ public class Chaser : MonoBehaviour {
         }
 
 	}
+
+    void OnCollisionEnter2D(Collision2D wall)
+    {
+        if (wall.collider.gameObject.tag == "Scenery")
+        {
+            aroundTime++;
+        }
+    }
 
     public void EnemyDamage(int damage)
     {

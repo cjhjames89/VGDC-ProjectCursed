@@ -11,6 +11,8 @@ public class Shooter : MonoBehaviour {
     public GameObject projectile;
     public float rate;
     private float fireTime;
+    private Vector3 direction;
+    private float aroundTime;
 
     // Use this for initialization
     void Start()
@@ -22,6 +24,8 @@ public class Shooter : MonoBehaviour {
         health = totalHealth;
 
         fireTime = 0;
+
+        aroundTime = 0;
     }
 
     // Update is called once per frame
@@ -37,9 +41,23 @@ public class Shooter : MonoBehaviour {
 
         healthBar.transform.localScale = new Vector3(2 * health / totalHealth, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
 
-        Vector3 direction1 = new Vector3(player.position.x - gameObject.transform.position.x, player.position.y - gameObject.transform.position.y, 0);
+        if (aroundTime > 0)
+        {
+            direction = new Vector3(gameObject.transform.position.y - player.position.y, player.position.x - gameObject.transform.position.x, 0);
+            aroundTime -= Time.deltaTime;
+        }
+        else
+        {
+            direction = new Vector3(player.position.x - gameObject.transform.position.x, player.position.y - gameObject.transform.position.y, 0);
+        }
 
-        direction1.Normalize();
+        direction.Normalize();
+
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+
+        PublicFunctions.PhaseThruEnemy(gameObject);
+
+        transform.Translate(direction * Time.deltaTime * speed);
 
         if (difference <= range & fireTime <= 0)
         {
@@ -50,11 +68,11 @@ public class Shooter : MonoBehaviour {
 
         if (difference > range*0.8)
         {
-            transform.Translate(direction1 * Time.deltaTime * speed);
+            transform.Translate(direction * Time.deltaTime * speed);
         }
         else if (difference < range*0.8)
         {
-            transform.Translate(-direction1 * Time.deltaTime * speed);
+            transform.Translate(-direction * Time.deltaTime * speed);
         }
 
         if (health <= 0)
@@ -65,6 +83,14 @@ public class Shooter : MonoBehaviour {
         PublicFunctions.PhaseThruEnemy(gameObject);
 
         gameObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
+    void OnCollisionEnter2D(Collision2D wall)
+    {
+        if (wall.collider.gameObject.tag == "Scenery")
+        {
+            aroundTime++;
+        }
     }
 
     public void EnemyDamage(int damage)
