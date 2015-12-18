@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f9b11e1a1fc0d68479ea7a04cd099246
-timeCreated: 1449642221
+guid: efbf73872c0f9044db2ef3a2597f6afe
+timeCreated: 1450404834
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: BrawlerSprite_0
+    21300000: brawler_realtemp_0
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -45,19 +45,19 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 64
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: BrawlerSprite_0
+    - name: brawler_realtemp_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 383
-        width: 97
-        height: 129
+        y: 0
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
