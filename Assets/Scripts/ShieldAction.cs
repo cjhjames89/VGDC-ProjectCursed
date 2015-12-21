@@ -13,12 +13,7 @@ public class ShieldAction : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D touch)
     {
-        if (touch.collider.gameObject.tag == "Enemy")
-        {
-            //Chaser.EnemyDamage(damage);
-            Chaser c = (Chaser) touch.collider.gameObject.GetComponent(typeof(Chaser));
-            c.EnemyDamage(damage);
-        }
+        PublicFunctions.DamageEnemy(touch, damage);
     }
 
 	// Update is called once per frame

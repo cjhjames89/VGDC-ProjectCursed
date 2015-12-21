@@ -13,12 +13,7 @@ public class ProjectileAction : MonoBehaviour {
 	
     void OnCollisionEnter2D(Collision2D contact)
     {
-        if (contact.collider.gameObject.tag == "Enemy")
-        {
-            //Chaser.EnemyDamage(damage);
-            Chaser c = (Chaser) contact.collider.gameObject.GetComponent(typeof(Chaser));
-            c.EnemyDamage(damage);
-        }
+        PublicFunctions.DamageEnemy(contact, damage);
 
         Destroy(gameObject);
     }

@@ -13,12 +13,7 @@ public class BombExplosion : MonoBehaviour {
 	
     void OnCollisionEnter2D(Collision2D hit)
     {
-        if (hit.collider.gameObject.tag == "Enemy")
-        {
-            //Chaser.EnemyDamage(damage);
-            Chaser c = (Chaser) hit.collider.gameObject.GetComponent(typeof(Chaser));
-            c.EnemyDamage(damage);
-        }
+        PublicFunctions.DamageEnemy(hit, damage);
     }
 
     // Update is called once per frame

@@ -91,4 +91,19 @@ public class PublicFunctions : MonoBehaviour
         return result;
     }
 
+    public static void DamageEnemy(Collision2D hit, int damage)
+    {
+        if (hit.collider.gameObject.tag == "EnemyChaser")
+        {
+            //Chaser.EnemyDamage(damage);
+            Chaser c = (Chaser)hit.collider.gameObject.GetComponent(typeof(Chaser));
+            c.EnemyDamage(damage);
+        }
+        else if (hit.collider.gameObject.tag == "EnemyShooter")
+        {
+            Shooter s = (Shooter)hit.collider.gameObject.GetComponent(typeof(Shooter));
+            s.EnemyDamage(damage);
+        }
+    }
+
 }

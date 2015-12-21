@@ -12,12 +12,7 @@ public class PunchCollision : MonoBehaviour {
 
     void OnCollisionEnter2D (Collision2D punch)
     {
-        if (punch.collider.gameObject.tag == "Enemy")
-        {
-            //Chaser.EnemyDamage(damage);
-            Chaser c = (Chaser) punch.collider.gameObject.GetComponent(typeof(Chaser));
-            c.EnemyDamage(damage);
-        }
+        PublicFunctions.DamageEnemy(punch, damage);
     }
 	
 	// Update is called once per frame
