@@ -20,6 +20,8 @@ public class ShieldAction : MonoBehaviour {
 	void Update ()
     {
         PublicFunctions.PhaseThruFriend(gameObject);
+
+        transform.localPosition = Vector3.zero;
 	}
 }
 

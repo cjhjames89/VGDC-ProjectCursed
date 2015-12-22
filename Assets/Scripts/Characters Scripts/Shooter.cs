@@ -57,20 +57,18 @@ public class Shooter : MonoBehaviour {
 
         PublicFunctions.PhaseThruEnemy(gameObject);
 
-        transform.Translate(direction * Time.deltaTime * speed);
-
         if (difference <= range & fireTime <= 0)
         {
-            Instantiate(projectile, gameObject.transform.position + Angle * 7, Quaternion.Euler(0, 0, PublicFunctions.FindAngle(Angle.x, Angle.y)));
+            Instantiate(projectile, gameObject.transform.position, Quaternion.Euler(0, 0, PublicFunctions.FindAngle(Angle.x, Angle.y)));
 
             fireTime += 1;
         }
 
-        if (difference > range*0.8)
+        if (difference > range*0.7)
         {
             transform.Translate(direction * Time.deltaTime * speed);
         }
-        else if (difference < range*0.8)
+        else if (difference < range*0.7)
         {
             transform.Translate(-direction * Time.deltaTime * speed);
         }

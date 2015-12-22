@@ -28,49 +28,38 @@ public class RangedAction : MonoBehaviour {
             fireWait -= Time.deltaTime;
         }
 
-	    if (Input.GetButtonDown("Action") & fireWait <= 0)
+	    if (Input.GetButton("Action") & fireWait <= 0)
         {
-            StartCoroutine(FireProjectile());
+            FireProjectile();
             fireWait += 1.2f / speed;
         }
 	}
 
-    IEnumerator FireProjectile ()
+    void FireProjectile ()
     {
-        timeToFire = true;
-
-        do
+        if (DirectionTracking.state == 1)
         {
-            if (DirectionTracking.state == 1)
-            {
-                Instantiate(projectile, characterTrans.position + new Vector3(5, 0, 0), characterTrans.rotation);
-            }
-            else if (DirectionTracking.state == 3)
-            {
-                Instantiate(projectile, characterTrans.position + new Vector3(-5, 0, 0), Quaternion.Euler(0, 0, 180));
-            }
-            else if (DirectionTracking.state == 4)
-            {
-                Instantiate(projectile, characterTrans.position + new Vector3(0, 5, 0), Quaternion.Euler(0, 0, 90));
-            }
-            else if (DirectionTracking.state == 2)
-            {
-                Instantiate(projectile, characterTrans.position + new Vector3(0, -5, 0), Quaternion.Euler(0, 0, 270));
-            }
+            Instantiate(projectile, characterTrans.position + new Vector3(5, 0, 0), characterTrans.rotation);
+        }
+        else if (DirectionTracking.state == 3)
+        {
+            Instantiate(projectile, characterTrans.position + new Vector3(-5, 0, 0), Quaternion.Euler(0, 0, 180));
+        }
+        else if (DirectionTracking.state == 4)
+        {
+            Instantiate(projectile, characterTrans.position + new Vector3(0, 5, 0), Quaternion.Euler(0, 0, 90));
+        }
+        else if (DirectionTracking.state == 2)
+        {
+            Instantiate(projectile, characterTrans.position + new Vector3(0, -5, 0), Quaternion.Euler(0, 0, 270));
+        }
 
-            StartCoroutine(PublicFunctions.InstantDrain(cost));
+        if (Input.GetButton("Action") == false)
+        {
+            timeToFire = false;
+        }
 
-            yield return new WaitForSeconds(1 / (speed * 2));
-
-            if (Input.GetButton("Action") == false)
-            {
-                timeToFire = false;
-            }
-
-            yield return new WaitForSeconds(1 / (speed * 2));
-
-        } while (timeToFire);
-       
+        StartCoroutine(PublicFunctions.InstantDrain(cost));
     }
 
     private void Instantiate(GameObject projectile, Vector3 vector3)
