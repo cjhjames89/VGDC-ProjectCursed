@@ -8,7 +8,6 @@ public class BrawlerAction : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        BoxCollider2D area = PunchCollider.GetComponent<BoxCollider2D>();
         PunchCollider.SetActive(false);
     }
 

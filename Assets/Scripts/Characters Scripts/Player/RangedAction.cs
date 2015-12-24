@@ -3,7 +3,6 @@ using System.Collections;
 using System;
 
 public class RangedAction : MonoBehaviour {
-    private bool timeToFire;
     public float speed;
     public GameObject projectile;
     private Transform characterTrans;
@@ -13,7 +12,7 @@ public class RangedAction : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-        timeToFire = false;
+        
 	}
 	
 	// Update is called once per frame
@@ -37,26 +36,21 @@ public class RangedAction : MonoBehaviour {
 
     void FireProjectile ()
     {
-        if (DirectionTracking.state == 1)
+        if (Input.GetAxis("Horizontal") > 0)
         {
-            Instantiate(projectile, characterTrans.position + new Vector3(5, 0, 0), characterTrans.rotation);
+            Instantiate(projectile, characterTrans.position + new Vector3(5, 0, 0), Quaternion.Euler(0, 0, 0));
         }
-        else if (DirectionTracking.state == 3)
+        else if (Input.GetAxis("Horizontal") < 0)
         {
             Instantiate(projectile, characterTrans.position + new Vector3(-5, 0, 0), Quaternion.Euler(0, 0, 180));
         }
-        else if (DirectionTracking.state == 4)
+        else if (Input.GetAxis("Vertical") > 0)
         {
             Instantiate(projectile, characterTrans.position + new Vector3(0, 5, 0), Quaternion.Euler(0, 0, 90));
         }
-        else if (DirectionTracking.state == 2)
+        else if (Input.GetAxis("Vertical") < 0)
         {
             Instantiate(projectile, characterTrans.position + new Vector3(0, -5, 0), Quaternion.Euler(0, 0, 270));
-        }
-
-        if (Input.GetButton("Action") == false)
-        {
-            timeToFire = false;
         }
 
         StartCoroutine(PublicFunctions.InstantDrain(cost));

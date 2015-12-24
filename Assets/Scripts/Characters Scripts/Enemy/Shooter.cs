@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Chaser : MonoBehaviour {
-
+public class Shooter : MonoBehaviour {
     public float totalHealth;
     private float health;
     public float speed;
     private Transform player;
     public GameObject healthBar;
+    public float range;
+    public GameObject projectile;
+    public float rate;
+    private float fireTime;
     private Vector3 direction;
     private float aroundTime;
 
@@ -20,13 +23,28 @@ public class Chaser : MonoBehaviour {
 
         health = totalHealth;
 
+        fireTime = 0;
+
         aroundTime = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        float difference = (player.position - gameObject.transform.position).magnitude;
+        Vector3 Angle = (player.position - gameObject.transform.position).normalized;
+
+        if (fireTime > 0)
+        {
+            fireTime -= Time.deltaTime;
+        }
+
         healthBar.transform.localScale = new Vector3(2 * health / totalHealth, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
+
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
 
         if (aroundTime > 0)
         {
@@ -37,30 +55,33 @@ public class Chaser : MonoBehaviour {
         {
             direction = new Vector3(player.position.x - gameObject.transform.position.x, player.position.y - gameObject.transform.position.y, 0);
         }
-        
+
         direction.Normalize();
+
+        if (difference > range * 0.7)
+        {
+            transform.Translate(direction * Time.deltaTime * speed);
+        }
+        else if (difference < range * 0.7)
+        {
+            transform.Translate(-direction * Time.deltaTime * speed);
+        }
 
         transform.rotation = Quaternion.Euler(0, 0, 0);
 
         PublicFunctions.PhaseThruEnemy(gameObject);
 
-        transform.Translate(direction * Time.deltaTime * speed);
-
-        if (health != totalHealth)
+        if (difference <= range & fireTime <= 0)
         {
-            healthBar.SetActive(true);
-        }
+            Instantiate(projectile, gameObject.transform.position, Quaternion.Euler(0, 0, PublicFunctions.FindAngle(Angle.x, Angle.y)));
 
-        if (health <= 0)
-        {
-            Destroy(gameObject);
+            fireTime += 1;
         }
-
-	}
+    }
 
     void OnCollisionEnter2D(Collision2D wall)
     {
-        if (wall.collider.gameObject.tag == "Scenery")
+        if (wall.gameObject.CompareTag("Scenery"))
         {
             aroundTime++;
         }
