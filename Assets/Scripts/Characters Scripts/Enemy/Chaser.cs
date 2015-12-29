@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class Chaser : MonoBehaviour {
-
     public float totalHealth;
     private float health;
     public float speed;
@@ -10,6 +10,8 @@ public class Chaser : MonoBehaviour {
     public GameObject healthBar;
     private Vector3 direction;
     private float aroundTime;
+    public GameObject HealthPickUp;
+    public int dropPercent;
 
     // Use this for initialization
     void Start()
@@ -30,6 +32,13 @@ public class Chaser : MonoBehaviour {
 
         if (health <= 0)
         {
+            System.Random drop = new System.Random();
+            int chance = drop.Next(100);
+
+            if (dropPercent > chance)
+            {
+                Instantiate(HealthPickUp, gameObject.transform.position, Quaternion.Euler(0, 0, 0));
+            }
             Destroy(gameObject);
         }
 

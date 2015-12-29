@@ -14,7 +14,7 @@ public class PlayerCollisions : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D hit)
     {
-        if (hit.collider.gameObject.tag == "Danger" & notInvincible)
+        if (hit.collider.gameObject.CompareTag("Danger") & notInvincible)
         {
             CharacterHealth.takeDamage(1);
             StartCoroutine(Invincible(InvincibleTime));
@@ -23,10 +23,13 @@ public class PlayerCollisions : MonoBehaviour {
 
     void OnCollisionStay2D(Collision2D hit)
     {
-        if (hit.collider.gameObject.tag == "Enemy" & notInvincible)
+        if (hit.collider.gameObject.CompareTag("EnemyShooter") | hit.collider.gameObject.CompareTag("EnemyChaser"))
         { 
-            CharacterHealth.takeDamage(1);
-            StartCoroutine(Invincible(InvincibleTime));
+            if (notInvincible)
+            {
+                CharacterHealth.takeDamage(1);
+                StartCoroutine(Invincible(InvincibleTime));
+            } 
         }
     }
 

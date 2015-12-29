@@ -14,10 +14,10 @@ public class PublicFunctions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PhaseThruFriend(gameObject);
+
     }
 
-    public static void PhaseThruFriend(GameObject thing)
+    public static void PhaseThruPlayer(GameObject thing)
     {
         GameObject[] friendlies = GameObject.FindGameObjectsWithTag("Friendly");
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
@@ -33,13 +33,29 @@ public class PublicFunctions : MonoBehaviour
         }
     }
 
+    public static void PhaseThruFriend(GameObject thing)
+    {
+        GameObject[] friendlies = GameObject.FindGameObjectsWithTag("Friendly");
+
+        foreach (GameObject col in friendlies)
+        {
+            Physics2D.IgnoreCollision(thing.GetComponent<Collider2D>(), col.GetComponent<Collider2D>());
+        }
+    }
+
     public static void PhaseThruEnemy(GameObject thing)
     {
 
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] enemyShooters = GameObject.FindGameObjectsWithTag("EnemyShooter");
+        GameObject[] enemyChasers = GameObject.FindGameObjectsWithTag("EnemyChaser");
         GameObject[] dangers = GameObject.FindGameObjectsWithTag("Danger");
 
-        foreach (GameObject col in enemies)
+        foreach (GameObject col in enemyShooters)
+        {
+            Physics2D.IgnoreCollision(thing.GetComponent<Collider2D>(), col.GetComponent<Collider2D>());
+        }
+
+        foreach (GameObject col in enemyChasers)
         {
             Physics2D.IgnoreCollision(thing.GetComponent<Collider2D>(), col.GetComponent<Collider2D>());
         }

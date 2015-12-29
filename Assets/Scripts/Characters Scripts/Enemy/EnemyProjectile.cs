@@ -9,6 +9,8 @@ public class EnemyProjectile : MonoBehaviour {
     void Start()
     {
         Destroy(gameObject, 3);
+
+        PublicFunctions.PhaseThruEnemy(gameObject);
     }
 
     void OnCollisionEnter2D(Collision2D contact)

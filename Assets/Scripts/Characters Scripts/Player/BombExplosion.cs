@@ -19,7 +19,7 @@ public class BombExplosion : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        PublicFunctions.PhaseThruFriend(gameObject);
+        PublicFunctions.PhaseThruPlayer(gameObject);
     }
 
 }

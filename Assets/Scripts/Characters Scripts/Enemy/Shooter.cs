@@ -13,6 +13,8 @@ public class Shooter : MonoBehaviour {
     private float fireTime;
     private Vector3 direction;
     private float aroundTime;
+    public GameObject HealthPickUp;
+    public int dropPercent;
 
     // Use this for initialization
     void Start()
@@ -43,6 +45,13 @@ public class Shooter : MonoBehaviour {
 
         if (health <= 0)
         {
+            System.Random drop = new System.Random();
+            int chance = drop.Next(100);
+
+            if (dropPercent > chance)
+            {   
+                Instantiate(HealthPickUp, gameObject.transform.position, Quaternion.Euler(0, 0, 0));
+            }
             Destroy(gameObject);
         }
 
@@ -55,7 +64,7 @@ public class Shooter : MonoBehaviour {
         {
             direction = new Vector3(player.position.x - gameObject.transform.position.x, player.position.y - gameObject.transform.position.y, 0);
         }
-
+        
         direction.Normalize();
 
         if (difference > range * 0.7)

@@ -19,7 +19,7 @@ public class ShieldAction : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        PublicFunctions.PhaseThruFriend(gameObject);
+        PublicFunctions.PhaseThruPlayer(gameObject);
 
         transform.localPosition = Vector3.zero;
 	}
