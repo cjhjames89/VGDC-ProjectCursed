@@ -3,12 +3,11 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
 
-  
     public float movementSpeed;
 
 	// Use this for initialization
 	void Start () {
-	
+
 	}
 	
 	// Update is called once per frame
@@ -18,4 +17,5 @@ public class PlayerMovement : MonoBehaviour {
         
 
     }
+
 }
