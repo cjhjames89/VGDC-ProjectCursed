@@ -52,6 +52,10 @@ public class RangedAction : MonoBehaviour {
         {
             Instantiate(projectile, characterTrans.position + new Vector3(0, -5, 0), Quaternion.Euler(0, 0, 270));
         }
+        else
+        {
+            Instantiate(projectile, characterTrans.position + new Vector3(5, 0, 0), Quaternion.Euler(0, 0, 0));
+        }
 
         StartCoroutine(PublicFunctions.InstantDrain(cost));
     }

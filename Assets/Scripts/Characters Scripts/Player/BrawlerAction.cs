@@ -18,15 +18,10 @@ public class BrawlerAction : MonoBehaviour {
     {
         gameObject.transform.localPosition = Vector3.zero;
 
-        if (Input.GetButton("Action"))
+        if (Input.GetButtonDown("Action"))
         {
-            PunchCollider.SetActive(true);
-            EnergyBar.accel = cost;
-        }
-        else
-        {
-            PunchCollider.SetActive(false);
-            EnergyBar.accel = 0;
+            StartCoroutine(Punch());
+            StartCoroutine(PublicFunctions.InstantDrain(cost));
         }
 
         //////////ANIMATION//////////
@@ -51,4 +46,10 @@ public class BrawlerAction : MonoBehaviour {
         ///////END OF ANIMATION///////
     }
 
+    private IEnumerator Punch()
+    {
+        PunchCollider.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        PunchCollider.SetActive(false);
+    }
 }

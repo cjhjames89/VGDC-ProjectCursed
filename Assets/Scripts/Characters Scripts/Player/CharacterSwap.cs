@@ -37,5 +37,6 @@ public class CharacterSwap : MonoBehaviour {
         characters[++charIndex % characters.Length].SetActive(true);
         PlayerCollisions.sprite = characters[charIndex % characters.Length].GetComponent<SpriteRenderer>();
         EnergyBar.accel = 0;
+        EnergyBar.instant = 0;
     }
 }
