@@ -36,25 +36,21 @@ public class RangedAction : MonoBehaviour {
 
     void FireProjectile ()
     {
-        if (Input.GetAxis("Horizontal") > 0)
+        if (DirectionTracking.state == 1)
         {
             Instantiate(projectile, characterTrans.position + new Vector3(5, 0, 0), Quaternion.Euler(0, 0, 0));
         }
-        else if (Input.GetAxis("Horizontal") < 0)
+        else if (DirectionTracking.state == 3)
         {
             Instantiate(projectile, characterTrans.position + new Vector3(-5, 0, 0), Quaternion.Euler(0, 0, 180));
         }
-        else if (Input.GetAxis("Vertical") > 0)
+        else if (DirectionTracking.state == 4)
         {
             Instantiate(projectile, characterTrans.position + new Vector3(0, 5, 0), Quaternion.Euler(0, 0, 90));
         }
-        else if (Input.GetAxis("Vertical") < 0)
+        else if (DirectionTracking.state == 2)
         {
             Instantiate(projectile, characterTrans.position + new Vector3(0, -5, 0), Quaternion.Euler(0, 0, 270));
-        }
-        else
-        {
-            Instantiate(projectile, characterTrans.position + new Vector3(5, 0, 0), Quaternion.Euler(0, 0, 0));
         }
 
         StartCoroutine(PublicFunctions.InstantDrain(cost));

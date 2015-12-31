@@ -18,19 +18,19 @@ public class PunchCollision : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     { 
-        if (Input.GetAxis("Horizontal") > 0)
+        if (DirectionTracking.state == 1)
         {
             transform.localPosition = new Vector3(5, 0, 0);
         }
-        else if (Input.GetAxis("Horizontal") < 0)
+        else if (DirectionTracking.state == 3)
         {
             transform.localPosition = new Vector3(-5, 0, 0);
         }
-        else if (Input.GetAxis("Vertical") > 0)
+        else if (DirectionTracking.state == 4)
         {
             transform.localPosition = new Vector3(0, 6, 0);
         }
-        else if (Input.GetAxis("Vertical") < 0)
+        else if (DirectionTracking.state == 2)
         {
             transform.localPosition = new Vector3(0, -6, 0);
         }
