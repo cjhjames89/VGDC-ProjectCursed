@@ -9,6 +9,8 @@ public class ProjectileAction : MonoBehaviour {
 	void Start ()
     {
         Destroy(gameObject, 3);
+
+        PublicFunctions.PhaseThruPlayer(gameObject);
     }
 	
     void OnCollisionEnter2D(Collision2D contact)
@@ -21,6 +23,8 @@ public class ProjectileAction : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-            transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
+        transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
+
+        PublicFunctions.PhaseThruPlayer(gameObject);
     }
 }

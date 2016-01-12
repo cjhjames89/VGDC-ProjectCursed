@@ -4,12 +4,17 @@ using System.Collections;
 public class ShieldAction : MonoBehaviour {
     public int damage;
     public float size;
+    private CircleCollider2D outer;
 
 	// Use this for initialization
 	void Start ()
     {
-        gameObject.transform.localScale = new Vector3(size, size, size);
-	}
+        outer = gameObject.GetComponent<CircleCollider2D>();
+
+        gameObject.transform.localScale = new Vector3(size * 3 / 4, size, size);
+        PublicFunctions.PhaseThruPlayer(gameObject);
+        PublicFunctions.PhaseThruEnemy(gameObject);
+    }
 
     void OnCollisionEnter2D(Collision2D touch)
     {
@@ -20,6 +25,7 @@ public class ShieldAction : MonoBehaviour {
 	void Update ()
     {
         PublicFunctions.PhaseThruPlayer(gameObject);
+        PublicFunctions.PhaseThruEnemy(gameObject);
 
         transform.localPosition = Vector3.zero;
 	}

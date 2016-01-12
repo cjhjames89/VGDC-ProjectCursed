@@ -5,23 +5,30 @@ public class BrawlerAction : MonoBehaviour {
     public GameObject PunchCollider;
     public float cost;
     public Animator animator;
+    private float PunchTime;
 
     // Use this for initialization
     void Start()
     {
         PunchCollider.SetActive(false);
         animator = GetComponent<Animator>();
+        PunchTime = 0f;
     }
 
     // Update is called once per frame
     void Update()
     {
         gameObject.transform.localPosition = Vector3.zero;
+        if (PunchTime > 0)
+        {
+            PunchTime -= Time.deltaTime;
+        }
 
-        if (Input.GetButtonDown("Action"))
+        if (Input.GetButtonDown("Action") & PunchTime <= 0)
         {
             StartCoroutine(Punch());
             StartCoroutine(PublicFunctions.InstantDrain(cost));
+            PunchTime += 1;
         }
 
         //////////ANIMATION//////////
