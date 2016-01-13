@@ -5,14 +5,9 @@ public class PlayerMovement : MonoBehaviour {
 
     public float movementSpeed;
 
-    public LayerMask blockingLayer;
-
-    private BoxCollider2D boxCollider;
-
 	// Use this for initialization
 	void Start () {
-        boxCollider = GetComponent<BoxCollider2D>();
-        Debug.Log("x=" + boxCollider.size.x + " y=" + boxCollider.size.y);
+
 	}
 	
 	// Update is called once per frame
