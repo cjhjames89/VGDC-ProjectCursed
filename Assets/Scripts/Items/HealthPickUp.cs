@@ -9,16 +9,14 @@ public class HealthPickUp : MonoBehaviour {
 	void Start ()
     {
         Destroy(gameObject, stay);
-        PublicFunctions.PhaseThruEnemy(gameObject);
-        PublicFunctions.PhaseThruFriend(gameObject);
+        PublicFunctions.PhaseThruTag(gameObject, new string[] { "Player", "Enemy", "Friendly", "Danger" });
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        PublicFunctions.PhaseThruEnemy(gameObject);
-        PublicFunctions.PhaseThruFriend(gameObject);
-	}
+        PublicFunctions.PhaseThruTag(gameObject, new string[] { "Player", "Enemy", "Friendly", "Danger" });
+    }
 
     void OnCollisionEnter2D(Collision2D PickUp)
     {

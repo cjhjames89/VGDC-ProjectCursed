@@ -10,7 +10,7 @@ public class EnemyProjectile : MonoBehaviour {
     {
         Destroy(gameObject, 3);
 
-        PublicFunctions.PhaseThruEnemy(gameObject);
+        PublicFunctions.PhaseThruTag(gameObject, new string[] { "Enemy", "Danger" });
     }
 
     void OnCollisionEnter2D(Collision2D contact)
@@ -26,6 +26,6 @@ public class EnemyProjectile : MonoBehaviour {
     {
         transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
 
-        PublicFunctions.PhaseThruEnemy(gameObject);
+        PublicFunctions.PhaseThruTag(gameObject, new string[] { "Enemy", "Danger" });
     }
 }

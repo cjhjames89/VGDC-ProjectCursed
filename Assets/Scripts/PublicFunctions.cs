@@ -8,7 +8,7 @@ public class PublicFunctions : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -17,17 +17,44 @@ public class PublicFunctions : MonoBehaviour
 
     }
 
+    public static void PhaseThruTag(GameObject thing, string[] Tags)
+    {
+        GameObject[] enemyShooters = GameObject.FindGameObjectsWithTag("EnemyShooter");
+        GameObject[] enemyChasers = GameObject.FindGameObjectsWithTag("EnemyChaser");
+
+        GameObject[] enemies = enemyShooters.Concat(enemyChasers).ToArray();
+
+        foreach (string tag in Tags)
+        {
+            GameObject[] objects = { };
+
+            if (tag == "Enemy")
+            {
+                objects = enemies;
+            }
+            else
+            {
+                objects = GameObject.FindGameObjectsWithTag(tag);
+            }
+            
+            foreach (GameObject col in objects)
+            {
+                Physics2D.IgnoreCollision(thing.GetComponent<Collider2D>(), col.GetComponent<Collider2D>());
+            }
+        }
+    }
+    /*
     public static void PhaseThruPlayer(GameObject thing)
     {
         GameObject[] friendlies = GameObject.FindGameObjectsWithTag("Friendly");
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
 
         foreach (GameObject col in friendlies)
         {
             Physics2D.IgnoreCollision(thing.GetComponent<Collider2D>(), col.GetComponent<Collider2D>());
         }
 
-        foreach (GameObject col in players)
+        foreach (GameObject col in player)
         {
             Physics2D.IgnoreCollision(thing.GetComponent<Collider2D>(), col.GetComponent<Collider2D>());
         }
@@ -64,7 +91,7 @@ public class PublicFunctions : MonoBehaviour
         {
             Physics2D.IgnoreCollision(thing.GetComponent<Collider2D>(), col.GetComponent<Collider2D>());
         }
-    }
+    }*/
 
     public static IEnumerator InstantDrain(float drain)
     {

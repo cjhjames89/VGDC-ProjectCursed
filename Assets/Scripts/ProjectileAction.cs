@@ -10,7 +10,7 @@ public class ProjectileAction : MonoBehaviour {
     {
         Destroy(gameObject, 3);
 
-        PublicFunctions.PhaseThruPlayer(gameObject);
+        PublicFunctions.PhaseThruTag(gameObject, new string[] { "Player", "Friendly" });
     }
 	
     void OnCollisionEnter2D(Collision2D contact)
@@ -25,6 +25,6 @@ public class ProjectileAction : MonoBehaviour {
     {
         transform.Translate(new Vector3(1, 0, 0) * speed * Time.deltaTime);
 
-        PublicFunctions.PhaseThruPlayer(gameObject);
+        PublicFunctions.PhaseThruTag(gameObject, new string[] { "Player", "Friendly" });
     }
 }

@@ -58,7 +58,7 @@ public class Chaser : MonoBehaviour {
 
         transform.Translate(direction * Time.deltaTime * speed);
 
-        PublicFunctions.PhaseThruEnemy(gameObject);
+        PublicFunctions.PhaseThruTag(gameObject, new string[] { "Enemy", "Danger" });
     }
 
     void OnCollisionEnter2D(Collision2D wall)

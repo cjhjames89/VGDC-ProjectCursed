@@ -12,6 +12,11 @@ public class PlayerCollisions : MonoBehaviour {
         notInvincible = true;
 	}
 
+    void update()
+    {
+        PublicFunctions.PhaseThruTag(gameObject, new string[] { "Player", "Friendly" });
+    }
+
     void OnCollisionEnter2D(Collision2D hit)
     {
         if (hit.collider.gameObject.CompareTag("Danger") & notInvincible)

@@ -78,7 +78,7 @@ public class Shooter : MonoBehaviour {
 
         transform.rotation = Quaternion.Euler(0, 0, 0);
 
-        PublicFunctions.PhaseThruEnemy(gameObject);
+        PublicFunctions.PhaseThruTag(gameObject, new string[] { "Enemy", "Danger" });
 
         if (difference <= range & fireTime <= 0)
         {
