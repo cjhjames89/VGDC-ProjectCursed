@@ -34,6 +34,8 @@ public class BombAction : MonoBehaviour {
             detection.enabled = true;
             detection.radius = range;
         }
+
+        PublicFunctions.PhaseThruTag(gameObject, new string[] { "Player", "Friendly" });
 	}
 
     IEnumerator Explode()
