@@ -67,14 +67,7 @@ public class Shooter : MonoBehaviour {
         
         direction.Normalize();
 
-        if (difference > range * 0.7)
-        {
-            transform.Translate(direction * Time.deltaTime * speed);
-        }
-        else if (difference < range * 0.7)
-        {
-            transform.Translate(-direction * Time.deltaTime * speed);
-        }
+        
 
         transform.rotation = Quaternion.Euler(0, 0, 0);
 
@@ -85,6 +78,22 @@ public class Shooter : MonoBehaviour {
             Instantiate(projectile, gameObject.transform.position, Quaternion.Euler(0, 0, PublicFunctions.FindAngle(Angle.x, Angle.y)));
 
             fireTime += 1;
+        }
+
+        if (difference > 50)
+        {
+            transform.Translate(new Vector3(0,0,0));
+        }
+        else
+        {
+            if (difference > range * 0.7)
+            {
+                transform.Translate(direction * Time.deltaTime * speed);
+            }
+            else if (difference < range * 0.7)
+            {
+                transform.Translate(-direction * Time.deltaTime * speed);
+            }
         }
     }
 

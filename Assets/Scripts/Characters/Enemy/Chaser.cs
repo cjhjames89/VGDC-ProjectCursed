@@ -55,8 +55,18 @@ public class Chaser : MonoBehaviour {
         direction.Normalize();
 
         transform.rotation = Quaternion.Euler(0, 0, 0);
+        float difference = (player.position - gameObject.transform.position).magnitude;
 
-        transform.Translate(direction * Time.deltaTime * speed);
+        if (difference > 50)
+        {
+            transform.Translate(new Vector3(0,0,0));
+        }
+        else
+        {
+            transform.Translate(direction * Time.deltaTime * speed);
+        }
+
+
 
         PublicFunctions.PhaseThruTag(gameObject, new string[] { "Enemy", "Danger" });
     }
