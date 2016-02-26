@@ -4,25 +4,16 @@ using System.Linq;
 
 public class PublicFunctions : MonoBehaviour
 {
-
-    // Use this for initialization
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public static void PhaseThruTag(GameObject thing, string[] Tags)
     {
         GameObject[] enemyShooters = GameObject.FindGameObjectsWithTag("EnemyShooter");
         GameObject[] enemyChasers = GameObject.FindGameObjectsWithTag("EnemyChaser");
+        GameObject[] enemyProtectors = GameObject.FindGameObjectsWithTag("EnemyProtector");
+        GameObject[] enemyShields = GameObject.FindGameObjectsWithTag("EnemyShield");
 
         GameObject[] enemies = enemyShooters.Concat(enemyChasers).ToArray();
+        enemies = enemies.Concat(enemyProtectors).ToArray();
+        enemies = enemies.Concat(enemyShields).ToArray();
 
         foreach (string tag in Tags)
         {
@@ -43,55 +34,6 @@ public class PublicFunctions : MonoBehaviour
             }
         }
     }
-    /*
-    public static void PhaseThruPlayer(GameObject thing)
-    {
-        GameObject[] friendlies = GameObject.FindGameObjectsWithTag("Friendly");
-        GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
-
-        foreach (GameObject col in friendlies)
-        {
-            Physics2D.IgnoreCollision(thing.GetComponent<Collider2D>(), col.GetComponent<Collider2D>());
-        }
-
-        foreach (GameObject col in player)
-        {
-            Physics2D.IgnoreCollision(thing.GetComponent<Collider2D>(), col.GetComponent<Collider2D>());
-        }
-    }
-
-    public static void PhaseThruFriend(GameObject thing)
-    {
-        GameObject[] friendlies = GameObject.FindGameObjectsWithTag("Friendly");
-
-        foreach (GameObject col in friendlies)
-        {
-            Physics2D.IgnoreCollision(thing.GetComponent<Collider2D>(), col.GetComponent<Collider2D>());
-        }
-    }
-
-    public static void PhaseThruEnemy(GameObject thing)
-    {
-
-        GameObject[] enemyShooters = GameObject.FindGameObjectsWithTag("EnemyShooter");
-        GameObject[] enemyChasers = GameObject.FindGameObjectsWithTag("EnemyChaser");
-        GameObject[] dangers = GameObject.FindGameObjectsWithTag("Danger");
-
-        foreach (GameObject col in enemyShooters)
-        {
-            Physics2D.IgnoreCollision(thing.GetComponent<Collider2D>(), col.GetComponent<Collider2D>());
-        }
-
-        foreach (GameObject col in enemyChasers)
-        {
-            Physics2D.IgnoreCollision(thing.GetComponent<Collider2D>(), col.GetComponent<Collider2D>());
-        }
-
-        foreach (GameObject col in dangers)
-        {
-            Physics2D.IgnoreCollision(thing.GetComponent<Collider2D>(), col.GetComponent<Collider2D>());
-        }
-    }*/
 
     public static IEnumerator InstantDrain(float drain)
     {
@@ -145,6 +87,16 @@ public class PublicFunctions : MonoBehaviour
         else if (hit.gameObject.CompareTag("EnemyShooter"))
         {
             Shooter s = (Shooter)hit.collider.gameObject.GetComponent(typeof(Shooter));
+            s.EnemyDamage(damage);
+        }
+        else if (hit.gameObject.CompareTag("EnemyProtector"))
+        {
+            Protector p = (Protector)hit.collider.gameObject.GetComponent(typeof(Protector));
+            p.EnemyDamage(damage);
+        }
+        else if (hit.gameObject.CompareTag("EnemyShield"))
+        {
+            EnemyShield s = (EnemyShield)hit.collider.gameObject.GetComponent(typeof(EnemyShield));
             s.EnemyDamage(damage);
         }
     }

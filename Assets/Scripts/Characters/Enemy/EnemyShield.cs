@@ -14,13 +14,16 @@ public class EnemyShield : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        Transform player = GameObject.FindWithTag("Player").transform;
-        Transform target = player;
-        Vector3 targetPos = target.position;
-        targetPos.z = gameObject.transform.position.z;
-        target.position = targetPos;
+        if (health <= 0)
+        {
+            gameObject.SetActive(false);
+        }
 
-        transform.LookAt(target);
+        Vector3 player = GameObject.FindWithTag("Player").transform.position;
+        Vector3 difference = (player - gameObject.transform.position).normalized;
+        int offset = 135;
+
+        transform.rotation = Quaternion.Euler(0, 0, PublicFunctions.FindAngle(difference.x, difference.y)+offset);
 
         PublicFunctions.PhaseThruTag(gameObject, new string[] { "Enemy", "Danger" });
     }
