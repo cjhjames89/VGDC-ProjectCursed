@@ -2,26 +2,26 @@
 using System.Collections;
 using System;
 
-public class Chaser : CommonEnemy {
+public class Chaser : MonoBehaviour {
 
     // Use this for initialization
-    protected override void Start()
+    void Start()
     {
-        base.Start();
+ 
     }
 
     // Update is called once per frame
-    protected override void Update()
+    void Update()
     {
-        base.Update();
+        CommonEnemy norm = gameObject.GetComponent<CommonEnemy>();
 
-        if (difference > 50)
+        if (norm.difference > 50)
         {
             transform.Translate(new Vector3(0, 0, 0));
         }
         else
         {
-            transform.Translate(direction * Time.deltaTime * speed);
+            transform.Translate(norm.direction * Time.deltaTime * norm.speed);
         }
     }
 }

@@ -1,52 +1,50 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Shooter : CommonEnemy {
+public class Shooter : MonoBehaviour {
     public float range;
     public GameObject projectile;
     public float rate;
     private float fireTime;
 
     // Use this for initialization
-    protected override void Start()
+    void Start()
     {
-        base.Start();
-
         fireTime = 0;
     }
 
     // Update is called once per frame
-    protected override void Update()
+    void Update()
     {
-        base.Update();
+        CommonEnemy norm = gameObject.GetComponent<CommonEnemy>();
 
-        Vector3 Angle = (player.position - gameObject.transform.position).normalized;
+        Vector3 Angle = (norm.player.position - gameObject.transform.position).normalized;
 
         if (fireTime > 0)
         {
             fireTime -= Time.deltaTime;
         }
 
-        if (difference <= range & fireTime <= 0)
+        if (norm.difference <= range & fireTime <= 0)
         {
             Instantiate(projectile, gameObject.transform.position, Quaternion.Euler(0, 0, PublicFunctions.FindAngle(Angle.x, Angle.y)));
 
             fireTime += 1;
         }
 
-        if (difference > 50)
+        if (norm.difference > 50)
         {
             transform.Translate(new Vector3(0,0,0));
         }
         else
         {
-            if (difference > range * 0.7)
+            if (norm.difference > range * 0.7)
             {
-                transform.Translate(direction * Time.deltaTime * speed);
+                transform.Translate(norm.direction * Time.deltaTime * norm.speed);
             }
-            else if (difference < range * 0.7)
+            else if (norm.difference < range * 0.7)
             {
-                transform.Translate(-direction * Time.deltaTime * speed);
+                transform.Translate(-norm.direction * Time.deltaTime * norm.speed);
             }
         }
     }

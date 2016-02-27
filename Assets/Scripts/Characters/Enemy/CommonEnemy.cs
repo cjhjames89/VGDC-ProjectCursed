@@ -3,18 +3,18 @@ using System.Collections;
 
 public class CommonEnemy : MonoBehaviour {
     public float totalHealth;
-    protected float health;
+    private float health;
     public float speed;
-    protected Transform player;
+    public Transform player;
     public GameObject healthBar;
-    protected Vector3 direction;
-    protected float aroundTime;
+    public Vector3 direction;
+    private float aroundTime;
     public GameObject HealthPickUp;
     public int dropPercent;
-    protected float difference;
+    public float difference;
 
     // Use this for initialization
-    protected virtual void Start ()
+    void Start ()
     {
         player = GameObject.FindWithTag("Player").transform;
 
@@ -26,7 +26,7 @@ public class CommonEnemy : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	protected virtual void Update ()
+	void Update ()
     {
         healthBar.transform.localScale = new Vector3(2 * health / totalHealth, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
 

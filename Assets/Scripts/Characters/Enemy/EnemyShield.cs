@@ -4,6 +4,7 @@ using System.Collections;
 public class EnemyShield : MonoBehaviour {
     public float totalHealth;
     private float health;
+    public GameObject master;
 
     // Use this for initialization
     void Start ()
@@ -23,6 +24,7 @@ public class EnemyShield : MonoBehaviour {
         Vector3 difference = (player - gameObject.transform.position).normalized;
         int offset = 135;
 
+        transform.position = master.transform.position;
         transform.rotation = Quaternion.Euler(0, 0, PublicFunctions.FindAngle(difference.x, difference.y)+offset);
 
         PublicFunctions.PhaseThruTag(gameObject, new string[] { "Enemy", "Danger" });
