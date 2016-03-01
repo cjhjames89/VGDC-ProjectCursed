@@ -18,7 +18,7 @@ public class BombAction : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D enemy)
     {
-        if (enemy.gameObject.CompareTag("EnemyShooter") | enemy.gameObject.CompareTag("EnemyChaser") | enemy.gameObject.CompareTag("Danger"))
+        if (enemy.gameObject.CompareTag("Enemy") | enemy.gameObject.CompareTag("Danger"))
         {
             StartCoroutine(Explode());
         }

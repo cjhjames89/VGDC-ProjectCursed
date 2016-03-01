@@ -15,12 +15,18 @@ public class Protector : MonoBehaviour {
         CommonEnemy norm = gameObject.GetComponent<CommonEnemy>();
 
         Vector3 against = norm.player.position;
+        print("against:");
+        print(against);
 
         GameObject[] partners = GameObject.FindGameObjectsWithTag("Enemy");
 
         Vector3 partner = getShortest(partners, 50).transform.position;
+        print("partner:");
+        print(partner);
 
         Vector3 destination = guardPosition(against, partner, 12);
+        print("destination:");
+        print(destination);
 
         Vector3 direction = destination - gameObject.transform.position;
 
@@ -48,7 +54,7 @@ public class Protector : MonoBehaviour {
     {
         Vector3 angle = attacker;
 
-        Vector3 result = angle.normalized*forward + priority;
+        Vector3 result = (angle - priority).normalized*forward + priority;
 
         return result;
     }
