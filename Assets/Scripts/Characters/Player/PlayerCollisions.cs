@@ -28,13 +28,10 @@ public class PlayerCollisions : MonoBehaviour {
 
     void OnCollisionStay2D(Collision2D hit)
     {
-        if (hit.collider.gameObject.CompareTag("EnemyShooter") | hit.collider.gameObject.CompareTag("EnemyChaser"))
+        if (hit.collider.gameObject.CompareTag("Enemy") & notInvincible)
         { 
-            if (notInvincible)
-            {
                 CharacterHealth.takeDamage(1);
                 StartCoroutine(Invincible(InvincibleTime));
-            } 
         }
     }
 

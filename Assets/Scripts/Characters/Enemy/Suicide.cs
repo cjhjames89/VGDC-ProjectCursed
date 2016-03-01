@@ -16,7 +16,6 @@ public class Suicide : MonoBehaviour {
         if (player.gameObject.CompareTag("Player"))
         {
             StartCoroutine(Explode());
-            PublicFunctions.DamageEnemy(player, damage);
         }
     }
 
