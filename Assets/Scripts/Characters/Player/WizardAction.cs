@@ -30,14 +30,14 @@ public class WizardAction : MonoBehaviour {
             image.enabled = true;
 
             EnergyBar.accel = cost;
-        }
+        }//Turn on the shield if button's down, and accelerate drain of mana bar
         else
         {
             outer.enabled = false;
             image.enabled = false;
 
             EnergyBar.accel = 0;
-        }
+        }//
         
 	}
 }

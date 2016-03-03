@@ -19,17 +19,19 @@ public class BrawlerAction : MonoBehaviour {
     void Update()
     {
         gameObject.transform.localPosition = Vector3.zero;
+        //Sets this child game object to the same as the parent CharactherHolder
+
         if (PunchTime > 0)
         {
             PunchTime -= Time.deltaTime;
-        }
+        }//Punch recharging
 
         if (Input.GetButtonDown("Action") & PunchTime <= 0)
         {
             StartCoroutine(Punch());
             StartCoroutine(PublicFunctions.InstantDrain(cost));
             PunchTime += 1;
-        }
+        }//Punch if it's ready, and start recharging
 
         //////////ANIMATION//////////
 
@@ -58,5 +60,5 @@ public class BrawlerAction : MonoBehaviour {
         PunchCollider.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         PunchCollider.SetActive(false);
-    }
+    }//Place fist and take it back
 }

@@ -29,6 +29,7 @@ public class CommonEnemy : MonoBehaviour {
 	void Update ()
     {
         healthBar.transform.localScale = new Vector3(2 * health / totalHealth, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
+        //Sets the position of the health bar.
 
         if (health <= 0)
         {
@@ -40,7 +41,7 @@ public class CommonEnemy : MonoBehaviour {
                 Instantiate(HealthPickUp, gameObject.transform.position, Quaternion.Euler(0, 0, 0));
             }
             Destroy(gameObject);
-        }
+        }//If health is gone, try to drop health, and be destroyed.
 
         if (aroundTime > 0)
         {
@@ -50,14 +51,16 @@ public class CommonEnemy : MonoBehaviour {
         else
         {
             direction = new Vector3(player.position.x - gameObject.transform.position.x, player.position.y - gameObject.transform.position.y, 0);
-        }
+        }//If a wall is hit, travel perpendicular to target for one second. Otherwise, travel to the player.
 
         direction.Normalize();
 
         transform.rotation = Quaternion.Euler(0, 0, 0);
         difference = (player.position - gameObject.transform.position).magnitude;
+        //Distance from the player
 
         PublicFunctions.PhaseThruTag(gameObject, new string[] { "Enemy", "Danger" });
+        //Phase through all things tagged as enemies or dangerous to the player.
 
     }
 
@@ -66,7 +69,7 @@ public class CommonEnemy : MonoBehaviour {
         if (wall.gameObject.CompareTag("Scenery"))
         {
             aroundTime++;
-        }
+        }//If a wall is hit, add one second to travel perpendicular.
     }
 
     public void EnemyDamage(int damage)

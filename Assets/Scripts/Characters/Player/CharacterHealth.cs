@@ -11,7 +11,7 @@ public class CharacterHealth : MonoBehaviour {
     {
         totalHealth = AtotalHealth;
         health = totalHealth;
-	}
+	}//Set health to total health
 	
 	// Update is called once per frame
 	void Update ()

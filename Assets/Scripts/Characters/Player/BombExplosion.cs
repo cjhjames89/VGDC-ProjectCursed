@@ -14,12 +14,12 @@ public class BombExplosion : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D hit)
     {
         PublicFunctions.DamageEnemy(hit, damage);
-    }
+    }//Damage enemy on contact
 
     // Update is called once per frame
     void Update()
     {
         PublicFunctions.PhaseThruTag(gameObject, new string[] { "Player", "Friendly" });
-    }
+    }//Phase through friendly and player objects
 
 }

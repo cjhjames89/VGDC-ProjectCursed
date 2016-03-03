@@ -23,15 +23,18 @@ public class EnemyShield : MonoBehaviour {
         Vector3 player = GameObject.FindWithTag("Player").transform.position;
         Vector3 difference = (player - gameObject.transform.position).normalized;
         int offset = 135;
+        //Compensates for angle offset
 
         transform.position = master.transform.position;
         transform.rotation = Quaternion.Euler(0, 0, PublicFunctions.FindAngle(difference.x, difference.y)+offset);
+        //Sets rotation to face player in 2D
 
         PublicFunctions.PhaseThruTag(gameObject, new string[] { "Enemy", "Danger" });
+        //Phase through objects labeled as enemies or dangerous
     }
 
     public void EnemyDamage(int damage)
     {
         health -= damage;
-    }
+    }//Be damaged if hit
 }

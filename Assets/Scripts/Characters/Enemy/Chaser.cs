@@ -22,6 +22,6 @@ public class Chaser : MonoBehaviour {
         else
         {
             transform.Translate(norm.direction * Time.deltaTime * norm.speed);
-        }
+        }//Move to player if it's close enough
     }
 }

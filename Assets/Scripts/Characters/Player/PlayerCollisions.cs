@@ -23,7 +23,7 @@ public class PlayerCollisions : MonoBehaviour {
         {
             CharacterHealth.takeDamage(1);
             StartCoroutine(Invincible(InvincibleTime));
-        }
+        }//If player is hit by danger in first frame, start invincibility
     }
 
     void OnCollisionStay2D(Collision2D hit)
@@ -32,7 +32,7 @@ public class PlayerCollisions : MonoBehaviour {
         { 
                 CharacterHealth.takeDamage(1);
                 StartCoroutine(Invincible(InvincibleTime));
-        }
+        }//If player stays on enemy, do invincibility
     }
 
     // Update is called once per frame
@@ -50,5 +50,5 @@ public class PlayerCollisions : MonoBehaviour {
 
         notInvincible = true;
         sprite.color = Color.white;
-    }
+    }//Starts and stops invincibility
 }

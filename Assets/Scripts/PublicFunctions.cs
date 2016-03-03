@@ -15,7 +15,7 @@ public class PublicFunctions : MonoBehaviour
                 GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
                 GameObject[] shields = GameObject.FindGameObjectsWithTag("EnemyShield");
                 objects = enemies.Concat(shields).ToArray();
-            }
+            }//Includes objects tagged for enemies and enemyshields
             else
             {
                 objects = GameObject.FindGameObjectsWithTag(tag);
@@ -24,8 +24,8 @@ public class PublicFunctions : MonoBehaviour
             foreach (GameObject col in objects)
             {
                 Physics2D.IgnoreCollision(thing.GetComponent<Collider2D>(), col.GetComponent<Collider2D>());
-            }
-        }
+            }//Ignore collisions for each object with the tag
+        }//Applies for each tag in the array
     }
 
     public static IEnumerator InstantDrain(float drain)
@@ -33,7 +33,7 @@ public class PublicFunctions : MonoBehaviour
         EnergyBar.instant = drain;
         yield return new WaitForSeconds(1 / 60);
         EnergyBar.instant = 0;
-    }
+    }//For single-instance actions
 
     public static float WrapSin(float a)
     {
@@ -43,7 +43,7 @@ public class PublicFunctions : MonoBehaviour
         }
 
         return a;
-    }
+    }//To account for the range of asin.
 
     public static float FindAngle(float x, float y)
     {
@@ -51,9 +51,11 @@ public class PublicFunctions : MonoBehaviour
         
         float[] xlist = { Mathf.Rad2Deg * Mathf.Acos(x), -Mathf.Rad2Deg * Mathf.Acos(x) };
         float[] ylist = { Mathf.Rad2Deg * WrapSin(Mathf.Asin(y)), 180 - (Mathf.Rad2Deg * WrapSin(Mathf.Asin(y))) };
+        //Since each arc formula only accounts for half of the possible angles, both halves of each are covered
 
         float[] differences = {Mathf.Abs(xlist[0] - ylist[0]), Mathf.Abs(xlist[0] - ylist[1]),
                                Mathf.Abs(xlist[1] - ylist[0]), Mathf.Abs(xlist[1] - ylist[1])};
+        //Tests all possible configurations of angles
 
         foreach (float a in xlist)
         {
@@ -64,10 +66,10 @@ public class PublicFunctions : MonoBehaviour
                     result = a;
                 }
             }
-        }
+        }//Picks the angle that is most likely to be true
 
         return result;
-    }
+    }//Finds the angle between two objects
 
     public static void DamageEnemy(Collision2D hit, int damage)
     {
@@ -81,5 +83,5 @@ public class PublicFunctions : MonoBehaviour
             EnemyShield s = hit.gameObject.GetComponent<EnemyShield>();
             s.EnemyDamage(damage);
         }
-    }
+    }//Damages an enemy or enemyshield
 }

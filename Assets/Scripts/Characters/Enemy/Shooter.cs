@@ -23,14 +23,14 @@ public class Shooter : MonoBehaviour {
         if (fireTime > 0)
         {
             fireTime -= Time.deltaTime;
-        }
+        }//Recharge firing
 
         if (norm.difference <= range & fireTime <= 0)
         {
             Instantiate(projectile, gameObject.transform.position, Quaternion.Euler(0, 0, PublicFunctions.FindAngle(Angle.x, Angle.y)));
 
             fireTime += 1;
-        }
+        }//Fire if player is in range and if firing is ready
 
         if (norm.difference > 50)
         {
@@ -46,6 +46,6 @@ public class Shooter : MonoBehaviour {
             {
                 transform.Translate(-norm.direction * Time.deltaTime * norm.speed);
             }
-        }
+        }//Move to player if it's at a certain range. Back up if player's too close
     }
 }

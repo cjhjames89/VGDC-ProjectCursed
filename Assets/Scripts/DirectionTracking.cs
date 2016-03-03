@@ -28,6 +28,6 @@ public class DirectionTracking : MonoBehaviour {
         else if (Input.GetAxis("Vertical") < 0)
         {
             state = 2;
-        }
+        }//Makes direction-tracking states for the shooter
 	}
 }

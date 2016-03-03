@@ -42,7 +42,7 @@ public class Protector : MonoBehaviour {
         }
 
         return result;
-    }
+    }//Finds the enemy the shortest distance from gameObject if it's in range
 
     Vector3 guardPosition(Vector3 attacker, Vector3 priority, float forward)
     {
@@ -51,5 +51,5 @@ public class Protector : MonoBehaviour {
         Vector3 result = (angle - priority).normalized*forward + priority;
 
         return result;
-    }
+    }//Finds the position to guard the selected enemy
 }

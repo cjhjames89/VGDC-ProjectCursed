@@ -21,7 +21,7 @@ public class BombAction : MonoBehaviour {
         if (enemy.gameObject.CompareTag("Enemy") | enemy.gameObject.CompareTag("Danger"))
         {
             StartCoroutine(Explode());
-        }
+        }//If a bomb comes in contact with enemy or dangerous object, explode
     }
 
 	// Update is called once per frame
@@ -33,9 +33,10 @@ public class BombAction : MonoBehaviour {
         {
             detection.enabled = true;
             detection.radius = range;
-        }
+        }//Arm the bomb, until this time the bomb won't explode
 
         PublicFunctions.PhaseThruTag(gameObject, new string[] { "Player", "Friendly" });
+        //Phase through friendly and player objects.
 	}
 
     IEnumerator Explode()
@@ -45,5 +46,5 @@ public class BombAction : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
 
         Destroy(gameObject);
-    }
+    }//Turn on explosion object, then destroy
 }
