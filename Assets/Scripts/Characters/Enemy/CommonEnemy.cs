@@ -12,6 +12,8 @@ public class CommonEnemy : MonoBehaviour {
     public GameObject HealthPickUp;
     public int dropPercent;
     public float difference;
+    public bool isProtector;
+    public bool hasProtector;
 
     // Use this for initialization
     void Start ()
@@ -23,6 +25,9 @@ public class CommonEnemy : MonoBehaviour {
         health = totalHealth;
 
         aroundTime = 0;
+
+        isProtector = false;
+        hasProtector = false;
     }
 	
 	// Update is called once per frame
